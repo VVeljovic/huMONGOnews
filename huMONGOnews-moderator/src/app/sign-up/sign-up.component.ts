@@ -1,5 +1,6 @@
+import { ModeratorService } from './../services/moderator.service';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Provider } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   FormControl,
@@ -8,14 +9,19 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Moderator } from '../models/moderator.model';
+import { Subject, takeUntil } from 'rxjs';
+import { HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { ToastrService, provideToastr } from 'ngx-toastr';
 
 const Error = {
   username: {
-    pattern: 'Username should not contain any special characters',
+    pattern: 'Username required',
   },
   password: {
-    pattern:
-      'Password must contain a minimum of 6 characters includes at least 1 alphanumeric and special character',
+    pattern: 'Password required',
   },
   email: {
     pattern: 'Invalid email provided',
@@ -31,13 +37,33 @@ const Error = {
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, FlexLayoutModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FlexLayoutModule,
+    HttpClientModule,
+  ],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css',
+  providers: [ModeratorService],
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent implements OnInit, OnDestroy {
   errMsg: string[] = [];
   moderatorForm!: FormGroup;
+
+  onDestroy$ = new Subject<void>();
+
+  constructor(
+    private moderatorService: ModeratorService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
+
+  ngOnDestroy(): void {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
+  }
 
   ngOnInit() {
     this.buildForm();
@@ -45,16 +71,8 @@ export class SignUpComponent implements OnInit {
 
   buildForm() {
     this.moderatorForm = new FormGroup({
-      username: new FormControl('', [
-        Validators.required,
-        Validators.pattern(/^[\w\s]+$/),
-      ]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.pattern(
-          '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{5,}'
-        ),
-      ]),
+      username: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
@@ -81,9 +99,21 @@ export class SignUpComponent implements OnInit {
       }
     } else {
       this.errMsg = [];
-      console.log(this.moderatorForm.value);
+      const moderator: Moderator = this.moderatorForm.value;
+
+      this.moderatorService
+        .create(moderator)
+        .pipe(takeUntil(this.onDestroy$))
+        .subscribe((moderator) => {
+          sessionStorage.setItem('moderator', JSON.stringify(moderator));
+          this.toastr.success(
+            'Succesfully signed up! Please log in with your credentials',
+            'Success'
+          );
+          this.router.navigate(['log-in']);
+        });
+
       this.moderatorForm.reset();
-      alert('Registration Successful');
     }
   }
 }

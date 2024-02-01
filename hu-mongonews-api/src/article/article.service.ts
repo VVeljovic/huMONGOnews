@@ -8,21 +8,20 @@ import { Category } from 'src/category/category.schema';
 export class ArticleService {
   constructor(
     @InjectModel(Article.name) private articleModel: Model<Article>,
-    @InjectModel(Category.name) private categoryModel:Model<Category>
+    @InjectModel(Category.name) private categoryModel: Model<Category>,
   ) {}
 
-  async create({categoryId, ...createArticleDto}: Partial<Article>) {
+  async create({ categoryId, ...createArticleDto }: Partial<Article>) {
     const findCategory = await this.categoryModel.findById(categoryId);
-    if(!findCategory)
-    throw new HttpException('Category not found',404);
+    if (!findCategory) throw new HttpException('Category not found', 404);
     const createdArticle = new this.articleModel(createArticleDto);
 
-    const createdArticleSaved= await createdArticle.save();
+    const createdArticleSaved = await createdArticle.save();
     findCategory.articles.push(createdArticleSaved);
     await findCategory.save();
     return createdArticleSaved;
   }
-  
+
   async findAll() {
     return await this.articleModel.find();
   }
@@ -38,9 +37,11 @@ export class ArticleService {
   async findManyByModeratorId(moderatorId: string) {
     return await this.articleModel.find({ moderator: moderatorId });
   }
-  async getLastNArticles(n:number):Promise<Article[]>{
-    return this.articleModel.find().sort({dateCreated:-1}).limit(n).exec();
+
+  async getLastNArticles(n: number): Promise<Article[]> {
+    return this.articleModel.find().sort({ dateCreated: -1 }).limit(n).exec();
   }
+
   update(id: number, updateArticleDto: Partial<Article>) {
     return `This action updates a #${id} article`;
   }

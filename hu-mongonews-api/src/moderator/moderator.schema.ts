@@ -5,13 +5,13 @@ export type ModeratorDocument = HydratedDocument<Moderator>;
 
 @Schema()
 export class Moderator {
-  @Prop({ type: String, index: true })
+  @Prop({ type: String, index: true, unique: true })
   username: string;
 
   @Prop(String)
   password: string;
 
-  @Prop(String)
+  @Prop({ type: String, unique: true })
   email: string;
 
   @Prop(String)

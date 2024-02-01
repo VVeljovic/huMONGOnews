@@ -37,16 +37,8 @@ export class LogInComponent {
 
   buildForm() {
     this.loginForm = new FormGroup({
-      username: new FormControl('', [
-        Validators.required,
-        Validators.pattern(/^[\w\s]+$/),
-      ]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.pattern(
-          '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{5,}'
-        ),
-      ]),
+      username: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
     });
   }
 
