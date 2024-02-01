@@ -1,0 +1,294 @@
+<!-- TODO:
+- Create multiteasers/carousel/article overview layouts.
+- Use grid.
+- Use scroll-snap-type.
+- Use object-fit.
+- Use aspect ratio.
+- Tricks here: https://css-tricks.com/newsletter/276-future-friendly-layouts-and-design-system-vitals/
+-->
+<header class="page-header js-page-header wrapper">
+    <div class="grid">
+      <div class="logo">
+        <a href="#"><span>The</span> <span>Hotspot</span> <span>Herald</span></a>
+      </div>
+      <nav class="primary-navigation" aria-label="Primary Navigation">
+        <ul class="nav-list">
+          <li><a href="#">Articles</a></li>
+          <li><a href="#">Video</a></li>
+          <li class="more"><a href="#">More</a></li>
+          <li class="search-icon"><a href="#">🔎</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="grid search">
+      <form action="" method="get"><label for="search">Search</label><input type="text" id="search" /><input type="submit" value="Search" /></form>
+    </div>
+  </header>
+  <main class="page-content js-page-content">
+    <section class="articles wrapper">
+      <div class="grid">
+  
+        <article class="article card-img-top priority-1">
+          <a href="#">
+            <figure class="cover-img">
+              <picture>
+                <source srcset="https://source.unsplash.com/WLUHO9A_xik/1200x675 1024w, https://source.unsplash.com/WLUHO9A_xik/1600x900 1.5x" />
+                <source srcset="https://source.unsplash.com/WLUHO9A_xik/768x432 768w, https://source.unsplash.com/WLUHO9A_xik/1152x648 1.5x" />
+                <source srcset="https://source.unsplash.com/WLUHO9A_xik/480x270, https://source.unsplash.com/WLUHO9A_xik/960x540 2x" />
+                <img src="https://source.unsplash.com/WLUHO9A_xik/1090x614" alt="Quis aute iure reprehenderit in voluptate velit esse" />
+                <!-- img src="https://source.unsplash.com/WLUHO9A_xik/1090x1090" alt="Quis aute iure reprehenderit in voluptate velit esse" / -->
+              </picture>
+            </figure>
+            <div class="description">
+              <h2 class="headline"><span class="trumpet">Quis aute iure reprehenderit:</span> In voluptate velit esse</h2>
+              <p class="intro">Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
+            </div>
+          </a>
+        </article>
+  
+        <article class="article card-img-top priority-2">
+          <a href="#">
+            <figure class="cover-img">
+              <picture>
+                <source srcset="https://source.unsplash.com/tLxGw_ITs7k/1200x675 1024w, https://source.unsplash.com/tLxGw_ITs7k/1600x900 1.5x" />
+                <source srcset="https://source.unsplash.com/tLxGw_ITs7k/768x432 768w, https://source.unsplash.com/tLxGw_ITs7k/1152x648 1.5x" />
+                <source srcset="https://source.unsplash.com/tLxGw_ITs7k/480x270, https://source.unsplash.com/tLxGw_ITs7k/960x540 2x" />
+                <img src="https://source.unsplash.com/tLxGw_ITs7k/1090x614" alt="Quis aute iure reprehenderit in voluptate velit esse" />
+                <!-- img src="https://source.unsplash.com/WLUHO9A_xik/1090x1090" alt="Quis aute iure reprehenderit in voluptate velit esse" / -->
+              </picture>
+            </figure>
+            <div class="description">
+              <h2 class="headline"><span class="trumpet">Quo usque tandem abutere:</span> Catilina, patientia nostra?</h2>
+              <p class="intro">Magna pars studiorum, prodita quaerimus. Donec sed odio operae, eu vulputate felis rhoncus.</p>
+            </div>
+          </a>
+        </article>
+  
+        <article class="article card-img-top priority-2">
+          <a href="#">
+            <figure class="cover-img">
+              <picture>
+                <source srcset="https://source.unsplash.com/qexZLgMcbPc/1200x675 1024w, https://source.unsplash.com/qexZLgMcbPc/1600x900 1.5x" />
+                <source srcset="https://source.unsplash.com/qexZLgMcbPc/768x432 768w, https://source.unsplash.com/qexZLgMcbPc/1152x648 1.5x" />
+                <source srcset="https://source.unsplash.com/qexZLgMcbPc/480x270, https://source.unsplash.com/qexZLgMcbPc/960x540 2x" />
+                <img src="https://source.unsplash.com/qexZLgMcbPc/1090x614" alt="Quis aute iure reprehenderit in voluptate velit esse" />
+                <!-- img src="https://source.unsplash.com/WLUHO9A_xik/1090x1090" alt="Quis aute iure reprehenderit in voluptate velit esse" / -->
+              </picture>
+            </figure>
+            <div class="description">
+              <h2 class="headline">Ut enim ad minim veniam, quis nostrud exercitation.</h2>
+              <p class="intro">Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
+            </div>
+          </a>
+        </article>
+  
+        <article class="article card-img-top priority-3">
+          <a href="#">
+            <figure class="cover-img">
+              <picture>
+                <source srcset="https://source.unsplash.com/GAGkBd9yjqk/1200x675 1024w, https://source.unsplash.com/GAGkBd9yjqk/1600x900 1.5x" />
+                <source srcset="https://source.unsplash.com/GAGkBd9yjqk/768x432 768w, https://source.unsplash.com/GAGkBd9yjqk/1152x648 1.5x" />
+                <source srcset="https://source.unsplash.com/GAGkBd9yjqk/480x270, https://source.unsplash.com/GAGkBd9yjqk/960x540 2x" />
+                <img src="https://source.unsplash.com/GAGkBd9yjqk/1090x614" alt="Quis aute iure reprehenderit in voluptate velit esse" />
+                <!-- img src="https://source.unsplash.com/WLUHO9A_xik/1090x1090" alt="Quis aute iure reprehenderit in voluptate velit esse" / -->
+              </picture>
+            </figure>
+            <div class="description">
+              <h2 class="headline"><span class="trumpet">Quam temere in vitiis?</span> Legem sancimus haerentia.</h2>
+              <p class="intro">Donec sed odio operae, eu vulputate felis rhoncus. Petierunt uti sibi concilium totius Galliae in diem certam indicere.</p>
+            </div>
+          </a>
+        </article>
+  
+        <article class="article card-img-top priority-3">
+          <a href="#">
+            <figure class="cover-img">
+              <picture>
+                <source srcset="https://source.unsplash.com/KRttQCXUjNI/1200x675 1024w, https://source.unsplash.com/KRttQCXUjNI/1600x900 1.5x" />
+                <source srcset="https://source.unsplash.com/KRttQCXUjNI/768x432 768w, https://source.unsplash.com/KRttQCXUjNI/1152x648 1.5x" />
+                <source srcset="https://source.unsplash.com/KRttQCXUjNI/480x270, https://source.unsplash.com/KRttQCXUjNI/960x540 2x" />
+                <img src="https://source.unsplash.com/KRttQCXUjNI/1090x614" alt="Quis aute iure reprehenderit in voluptate velit esse" />
+                <!-- img src="https://source.unsplash.com/WLUHO9A_xik/1090x1090" alt="Quis aute iure reprehenderit in voluptate velit esse" / -->
+              </picture>
+            </figure>
+            <div class="description">
+              <h2 class="headline">Quae vero auctorem tractata ab fiducia dicuntur.</h2>
+              <p class="intro">Vivamus sagittis lacus vel augue laoreet rutrum faucibus. Phasellus laoreet lorem vel dolor tempus vehicula.</p>
+            </div>
+          </a>
+        </article>
+  
+        <article class="article card-img-top priority-3">
+          <a href="#">
+            <figure class="cover-img">
+              <picture>
+                <source srcset="https://source.unsplash.com/O59Y9Bkjxl4/1200x675 1024w, https://source.unsplash.com/O59Y9Bkjxl4/1600x900 1.5x" />
+                <source srcset="https://source.unsplash.com/O59Y9Bkjxl4/768x432 768w, https://source.unsplash.com/O59Y9Bkjxl4/1152x648 1.5x" />
+                <source srcset="https://source.unsplash.com/O59Y9Bkjxl4/480x270, https://source.unsplash.com/O59Y9Bkjxl4/960x540 2x" />
+                <img src="https://source.unsplash.com/O59Y9Bkjxl4/1090x614" alt="Quis aute iure reprehenderit in voluptate velit esse" />
+                <!-- img src="https://source.unsplash.com/WLUHO9A_xik/1090x1090" alt="Quis aute iure reprehenderit in voluptate velit esse" / -->
+              </picture>
+            </figure>
+            <div class="description">
+              <h2 class="headline">Qui ipsorum lingua Celtae, nostra Galli appellantur.</h2>
+              <p class="intro">Morbi odio eros, volutpat ut pharetra vitae, lobortis sed nibh. Plura mihi bona sunt, inclinet, amari petere vellent.</p>
+            </div>
+          </a>
+        </article>
+  
+        <article class="article card-img-top priority-3">
+          <a href="#">
+            <figure class="cover-img">
+              <picture>
+                <source srcset="https://source.unsplash.com/RJvJI1gTE7o/1200x675 1024w, https://source.unsplash.com/RJvJI1gTE7o/1600x900 1.5x" />
+                <source srcset="https://source.unsplash.com/RJvJI1gTE7o/768x432 768w, https://source.unsplash.com/RJvJI1gTE7o/1152x648 1.5x" />
+                <source srcset="https://source.unsplash.com/RJvJI1gTE7o/480x270, https://source.unsplash.com/RJvJI1gTE7o/960x540 2x" />
+                <img src="https://source.unsplash.com/RJvJI1gTE7o/1090x614" alt="Quis aute iure reprehenderit in voluptate velit esse" />
+                <!-- img src="https://source.unsplash.com/WLUHO9A_xik/1090x1090" alt="Quis aute iure reprehenderit in voluptate velit esse" / -->
+              </picture>
+            </figure>
+            <div class="description">
+              <h2 class="headline">Ut enim ad minim veniam, quis nostrud exercitation.</h2>
+              <p class="intro">Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.
+            </div>
+          </a>
+        </article>
+  
+      </div>
+    </section>
+    <section class="video wrapper">
+      <div class="grid">
+  
+        <h2 class="section-header">Latest videos</h2>
+        <article class="article card-img-top">
+          <a href="#">
+            <figure class="cover-img">
+              <picture>
+                <source srcset="https://source.unsplash.com/KRttQCXUjNI/1200x675 1024w, https://source.unsplash.com/KRttQCXUjNI/1600x900 1.5x" />
+                <source srcset="https://source.unsplash.com/KRttQCXUjNI/768x432 768w, https://source.unsplash.com/KRttQCXUjNI/1152x648 1.5x" />
+                <source srcset="https://source.unsplash.com/KRttQCXUjNI/480x270, https://source.unsplash.com/KRttQCXUjNI/960x540 2x" />
+                <img src="https://source.unsplash.com/KRttQCXUjNI/1090x614" alt="Quis aute iure reprehenderit in voluptate velit esse" />
+                <!-- img src="https://source.unsplash.com/WLUHO9A_xik/1090x1090" alt="Quis aute iure reprehenderit in voluptate velit esse" / -->
+              </picture>
+            </figure>
+            <div class="description">
+              <h3 class="headline">Quae vero auctorem tractata ab fiducia dicuntur.</h3>
+            </div>
+          </a>
+        </article>
+  
+        <article class="article card-img-top">
+          <a href="#">
+            <figure class="cover-img">
+              <picture>
+                <source srcset="https://source.unsplash.com/O59Y9Bkjxl4/1200x675 1024w, https://source.unsplash.com/O59Y9Bkjxl4/1600x900 1.5x" />
+                <source srcset="https://source.unsplash.com/O59Y9Bkjxl4/768x432 768w, https://source.unsplash.com/O59Y9Bkjxl4/1152x648 1.5x" />
+                <source srcset="https://source.unsplash.com/O59Y9Bkjxl4/480x270, https://source.unsplash.com/O59Y9Bkjxl4/960x540 2x" />
+                <img src="https://source.unsplash.com/O59Y9Bkjxl4/1090x614" alt="Quis aute iure reprehenderit in voluptate velit esse" />
+                <!-- img src="https://source.unsplash.com/WLUHO9A_xik/1090x1090" alt="Quis aute iure reprehenderit in voluptate velit esse" / -->
+              </picture>
+            </figure>
+            <div class="description">
+              <h3 class="headline">Qui ipsorum lingua Celtae, nostra Galli appellantur.</h3>
+            </div>
+          </a>
+        </article>
+  
+      </div>
+    </section>
+    <section class="articles wrapper">
+      <div class="grid">
+  
+        <article class="article card-img-top priority-1">
+          <a href="#">
+            <figure class="cover-img">
+              <picture>
+                <source srcset="https://source.unsplash.com/Aduh0KXCI1w/1200x675 1024w, https://source.unsplash.com/Aduh0KXCI1w/1600x900 1.5x" />
+                <source srcset="https://source.unsplash.com/Aduh0KXCI1w/768x432 768w, https://source.unsplash.com/Aduh0KXCI1w/1152x648 1.5x" />
+                <source srcset="https://source.unsplash.com/Aduh0KXCI1w/480x270, https://source.unsplash.com/Aduh0KXCI1w/960x540 2x" />
+                <img src="https://source.unsplash.com/Aduh0KXCI1w/1090x614" alt="Quis aute iure reprehenderit in voluptate velit esse" />
+                <!-- img src="https://source.unsplash.com/WLUHO9A_xik/1090x1090" alt="Quis aute iure reprehenderit in voluptate velit esse" / -->
+              </picture>
+            </figure>
+            <div class="description">
+              <h2 class="headline"><span class="trumpet">Quis aute iure reprehenderit:</span> In voluptate velit esse</h2>
+              <p class="intro">Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
+            </div>
+          </a>
+        </article>
+  
+        <article class="article card-img-top priority-2">
+          <a href="#">
+            <figure class="cover-img">
+              <picture>
+                <source srcset="https://source.unsplash.com/tLxGw_ITs7k/1200x675 1024w, https://source.unsplash.com/tLxGw_ITs7k/1600x900 1.5x" />
+                <source srcset="https://source.unsplash.com/tLxGw_ITs7k/768x432 768w, https://source.unsplash.com/tLxGw_ITs7k/1152x648 1.5x" />
+                <source srcset="https://source.unsplash.com/tLxGw_ITs7k/480x270, https://source.unsplash.com/tLxGw_ITs7k/960x540 2x" />
+                <img src="https://source.unsplash.com/tLxGw_ITs7k/1090x614" alt="Quis aute iure reprehenderit in voluptate velit esse" />
+                <!-- img src="https://source.unsplash.com/WLUHO9A_xik/1090x1090" alt="Quis aute iure reprehenderit in voluptate velit esse" / -->
+              </picture>
+            </figure>
+            <div class="description">
+              <h2 class="headline"><span class="trumpet">Quo usque tandem abutere:</span> Catilina, patientia nostra?</h2>
+              <p class="intro">Magna pars studiorum, prodita quaerimus. Donec sed odio operae, eu vulputate felis rhoncus.</p>
+            </div>
+          </a>
+        </article>
+  
+        <article class="article card-img-top priority-2">
+          <a href="#">
+            <figure class="cover-img">
+              <picture>
+                <source srcset="https://source.unsplash.com/g6tqHx0ME1o/1200x675 1024w, https://source.unsplash.com/g6tqHx0ME1o/1600x900 1.5x" />
+                <source srcset="https://source.unsplash.com/g6tqHx0ME1o/768x432 768w, https://source.unsplash.com/g6tqHx0ME1o/1152x648 1.5x" />
+                <source srcset="https://source.unsplash.com/g6tqHx0ME1o/480x270, https://source.unsplash.com/g6tqHx0ME1o/960x540 2x" />
+                <img src="https://source.unsplash.com/g6tqHx0ME1o/1090x614" alt="Quis aute iure reprehenderit in voluptate velit esse" />
+                <!-- img src="https://source.unsplash.com/WLUHO9A_xik/1090x1090" alt="Quis aute iure reprehenderit in voluptate velit esse" / -->
+              </picture>
+            </figure>
+            <div class="description">
+              <h2 class="headline">Ut enim ad minim veniam, quis nostrud exercitation.</h2>
+              <p class="intro">Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
+            </div>
+          </a>
+        </article>
+  
+      </div>
+    </section>
+  </main>
+  <footer class="page-footer js-page-footer wrapper">
+    <div class="grid">
+      <section class="col-3 about">
+        <h3>The Hotspot Herald</h3>
+        <address>
+          <p>Tribune Street 1<br />33333 Guthenberg<br />
+            <a href="tel:+13115552368">(311) 555-2368</a>
+          </p>
+        </address>
+      </section>
+      <section class="col-3">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#">Come visit</a></li>
+          <li><a href="#">Find an employee</a></li>
+          <li><a href="#">Jobs</a></li>
+        </ul>
+      </section>
+      <section class="col-3">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">Go grab the app</a></li>
+          <li><a href="#">Follow us on social media</a></li>
+          <li><a href="#">Newsletter</a></li>
+        </ul>
+      </section>
+      <section class="col-3">
+        <h4>About us</h4>
+        <ul>
+          <li><a href="#">Press releases</a></li>
+          <li><a href="#">The board</a></li>
+          <li><a href="#">Copyright</a></li>
+        </ul>
+      </section>
+    </div>
+  </footer>
