@@ -43,7 +43,7 @@ export class ArticleService {
   }
 
   update(id: number, updateArticleDto: Partial<Article>) {
-    return `This action updates a #${id} article`;
+   
   }
 
   remove(id: number) {
