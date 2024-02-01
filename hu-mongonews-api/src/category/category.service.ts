@@ -14,8 +14,8 @@ export class CategoryService {
     return `This action returns all category`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} category`;
+  async findOne(id: string) {
+    return await this.categoryModel.findById(id).populate('articles');
   }
 
   update(id: number, updateCategoryDto: Category) {
