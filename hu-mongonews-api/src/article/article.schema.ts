@@ -23,9 +23,12 @@ export class Article {
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Moderator', index: true })
   moderator: Moderator;
+  
 
   @Prop(Number)
   numberOfViews: number;
+
+  categoryId:string;
 }
 
 export const ArticleSchema = SchemaFactory.createForClass(Article);

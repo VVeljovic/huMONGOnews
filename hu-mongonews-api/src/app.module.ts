@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { ArticleModule } from './article/article.module';
 import { ModeratorModule } from './moderator/moderator.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ModeratorModule } from './moderator/moderator.module';
     MongooseModule.forRoot(process.env.CONNECTION_URI),
     ArticleModule,
     ModeratorModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

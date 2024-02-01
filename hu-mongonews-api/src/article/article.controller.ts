@@ -48,4 +48,9 @@ export class ArticleController {
   remove(@Param('id') id: string) {
     return this.articleService.remove(+id);
   }
+  @Get('getLastNArticles/:n')
+  async getLastNArticles(@Param('n')n:number)
+  {
+    return this.articleService.getLastNArticles(n);
+  }
 }
