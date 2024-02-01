@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
+import { ArticleModule } from './article/article.module';
+import { ModeratorModule } from './moderator/moderator.module';
 
 @Module({
   imports: [
@@ -10,6 +12,8 @@ import { ConfigModule } from '@nestjs/config';
       envFilePath: '.development.env',
     }),
     MongooseModule.forRoot(process.env.CONNECTION_URI),
+    ArticleModule,
+    ModeratorModule,
   ],
   controllers: [AppController],
   providers: [AppService],

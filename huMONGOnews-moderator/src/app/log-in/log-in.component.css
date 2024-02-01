@@ -1,0 +1,53 @@
+h1 {
+  font-size: 35px;
+  text-align: center;
+  color: #032F62;
+}
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #a0a0a0;
+  box-sizing: border-box;
+}
+
+span {
+  color: rgb(134, 15, 15);
+  font-size: 15px;
+}
+
+span::before {
+  content: "\f071";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  padding-right: 5px;
+}
+
+button {
+  padding: 12px 24px;
+  cursor: pointer;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  border-radius: 5px;
+  background-color: #032F62;
+  color: white;
+}
+
+button:hover {
+  background-color: #001f3f; /* Darken the color on hover */
+}
+
+
+.container {
+  width: 420px;
+  border: 2px solid #e7e7e7;
+  border-radius: 5px;
+  background-color: white;
+  margin-top: 10%;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
