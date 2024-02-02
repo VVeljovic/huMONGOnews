@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Put,
 } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { Article } from './article.schema';
@@ -38,10 +39,15 @@ export class ArticleController {
   async findManyByModeratorId(@Param('moderatorId') moderatorId: string) {
     return await this.articleService.findManyByModeratorId(moderatorId);
   }
+  @Get('lastNWithMostViews/:n')
+  async getLastNWithMostViews(@Param('n') n: number) {
+    console.log('a')
+    return await this.articleService.getNWithMostNumberOfViews(n);
+  }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateArticleDto: Partial<Article>) {
-    return this.articleService.update(+id, updateArticleDto);
+  @Put(':id')
+  update(@Param('id') id: string) {
+    return this.articleService.incrementNumberOfViews(id);
   }
 
   @Delete(':id')

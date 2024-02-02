@@ -11,4 +11,8 @@ export class ArticleService {
   {
     return this.httpClient.get(`${environment.api}article/getLastNArticles/7`);
   }
+  getTopViews()
+  {
+    return this.httpClient.get(`${environment.api}article/lastNWithMostViews/3`);
+  }
 }

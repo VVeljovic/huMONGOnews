@@ -11,11 +11,16 @@ import { CommonModule } from '@angular/common';
 })
 export class FrontPageComponent {
   articles:any ;
+  topViews:any;
 constructor(private articleService:ArticleService){
   this.articleService.getFrontPosts().subscribe((respo)=>{
-    console.log(respo)
+    
     this.articles = respo;
-    console.log(this.articles);
+    
   });
+  this.articleService.getTopViews().subscribe((respo)=>{
+    this.topViews=respo;
+    console.log(this.topViews);
+  })
 }
 }
