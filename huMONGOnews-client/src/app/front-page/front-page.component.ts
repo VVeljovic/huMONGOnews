@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { ArticleService } from '../services/article.service';
 import { CommonModule } from '@angular/common';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-front-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HeaderComponent],
   templateUrl: './front-page.component.html',
   styleUrl: './front-page.component.scss'
 })
