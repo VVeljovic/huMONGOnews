@@ -7,7 +7,12 @@
         <ul class="nav-list">
           <li><a href="#">Articles</a></li>
           <li><a href="#">Video</a></li>
-          <li class="more"><a href="#">More</a>
+          <li class="more"><a (click)="toggleMoreOptions()">More</a>
+            <ul class="more-options" *ngIf="showMoreOptions">
+                <li style="width: 200px;">Option 1 haskjhda khdas k</li>
+                <li>Option 2</li>
+                <!-- Dodajte više opcija prema potrebi -->
+              </ul>
         </li>
           <li class="search-icon"><a href="#">🔎</a></li>
         </ul>

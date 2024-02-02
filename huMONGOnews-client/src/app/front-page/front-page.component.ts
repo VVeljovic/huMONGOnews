@@ -21,7 +21,7 @@ constructor(private articleService:ArticleService){
   });
   this.articleService.getTopViews().subscribe((respo)=>{
     this.topViews=respo;
-    console.log(this.topViews);
+
   })
 }
 }
