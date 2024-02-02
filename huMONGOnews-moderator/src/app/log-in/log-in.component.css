@@ -1,7 +1,7 @@
 h1 {
   font-size: 35px;
   text-align: center;
-  color: #032F62;
+  color: #213555;
 }
 input {
   width: 100%;
@@ -33,12 +33,12 @@ button {
   font-weight: 600;
   line-height: 24px;
   border-radius: 5px;
-  background-color: #032F62;
+  background-color: #213555;
   color: white;
 }
 
 button:hover {
-  background-color: #001f3f; /* Darken the color on hover */
+  background-color: #4F709C; /* Darken the color on hover */
 }
 
 

@@ -26,6 +26,30 @@ export class ModeratorService {
     return await this.moderatorModel.findOne({ username });
   }
 
+  async logIn(username: string, password: string) {
+    const moderator = await this.findOneByUsername(username);
+
+    if (!moderator)
+      return {
+        message: 'Username not found!',
+        success: false,
+        moderator: undefined,
+      };
+
+    if (moderator.password !== password)
+      return {
+        message: 'Incorrect password!',
+        success: false,
+        moderator: undefined,
+      };
+
+    return {
+      message: `Log in successful. Welcome ${moderator.username}`,
+      success: true,
+      moderator: moderator,
+    };
+  }
+
   update(id: number, updateModeratorDto: Partial<Moderator>) {
     return `This action updates a #${id} moderator`;
   }

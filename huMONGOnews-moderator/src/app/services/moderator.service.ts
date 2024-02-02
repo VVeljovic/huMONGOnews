@@ -10,10 +10,25 @@ import { environment } from '../../environments/environment.development';
 export class ModeratorService {
   constructor(private httpClient: HttpClient) {}
 
-  create(moderator: Moderator): Observable<Moderator> {
+  signUp(moderator: Moderator): Observable<Moderator> {
     return this.httpClient.post<Moderator>(
       `${environment.apiUrl}/moderator`,
       moderator
     );
+  }
+
+  logIn(
+    username: string,
+    password: string
+  ): Observable<{
+    message: string;
+    success: boolean;
+    moderator: Moderator | undefined;
+  }> {
+    return this.httpClient.get<{
+      message: string;
+      success: boolean;
+      moderator: Moderator | undefined;
+    }>(`${environment.apiUrl}/moderator/${username}/${password}`);
   }
 }

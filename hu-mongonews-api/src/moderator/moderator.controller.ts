@@ -34,6 +34,14 @@ export class ModeratorController {
     return await this.moderatorService.findOneByUsername(username);
   }
 
+  @Get('logIn/:username/:password')
+  async logIn(
+    @Param('username') username: string,
+    @Param('password') password: string,
+  ) {
+    return await this.moderatorService.logIn(username, password);
+  }
+
   @Patch(':id')
   update(
     @Param('id') id: string,

@@ -102,10 +102,9 @@ export class SignUpComponent implements OnInit, OnDestroy {
       const moderator: Moderator = this.moderatorForm.value;
 
       this.moderatorService
-        .create(moderator)
+        .signUp(moderator)
         .pipe(takeUntil(this.onDestroy$))
-        .subscribe((moderator) => {
-          sessionStorage.setItem('moderator', JSON.stringify(moderator));
+        .subscribe((_) => {
           this.toastr.success(
             'Succesfully signed up! Please log in with your credentials',
             'Success'

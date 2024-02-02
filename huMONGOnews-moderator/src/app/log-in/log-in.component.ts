@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   FormControl,
@@ -8,6 +8,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { ModeratorService } from '../services/moderator.service';
+import { Subject, takeUntil } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 const Error = {
   username: {
@@ -22,17 +27,37 @@ const Error = {
 @Component({
   selector: 'app-log-in',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, FlexLayoutModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FlexLayoutModule,
+    HttpClientModule,
+  ],
   templateUrl: './log-in.component.html',
   styleUrl: './log-in.component.css',
+  providers: [ModeratorService],
 })
-export class LogInComponent {
+export class LogInComponent implements OnInit, OnDestroy {
   errMsg: string[] = [];
 
   loginForm!: FormGroup;
 
+  onDestroy$ = new Subject<void>();
+
+  constructor(
+    private moderatorService: ModeratorService,
+    private toastr: ToastrService,
+    private router: Router
+  ) {}
+
   ngOnInit() {
     this.buildForm();
+  }
+
+  ngOnDestroy(): void {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
   }
 
   buildForm() {
@@ -53,9 +78,22 @@ export class LogInComponent {
       }
     } else {
       this.errMsg = [];
-      console.log(this.loginForm.value);
+      const { username, pass } = this.loginForm.value;
+      this.moderatorService
+        .logIn(username, pass)
+        .pipe(takeUntil(this.onDestroy$))
+        .subscribe((data) => {
+          console.log(data);
+
+          if (data.success) {
+            sessionStorage.setItem('moderator', JSON.stringify(data.moderator));
+            this.toastr.success(data.message, 'Success');
+          } else {
+            this.toastr.error(data.message, 'Error');
+            this.router.navigate(['moderator-dashboard']);
+          }
+        });
       this.loginForm.reset();
-      alert('Login Successfully');
     }
   }
 }
