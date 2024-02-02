@@ -6,25 +6,8 @@
 - Use aspect ratio.
 - Tricks here: https://css-tricks.com/newsletter/276-future-friendly-layouts-and-design-system-vitals/
 -->
-<header class="page-header js-page-header wrapper">
-    <div class="grid">
-      <div class="logo">
-        <a href="#"><span>The</span> <span>Hotspot</span> <span>Herald</span></a>
-      </div>
-      <nav class="primary-navigation" aria-label="Primary Navigation">
-        <ul class="nav-list">
-          <li><a href="#">Articles</a></li>
-          <li><a href="#">Video</a></li>
-          <li class="more"><a href="#">More</a></li>
-          <li class="search-icon"><a href="#">🔎</a></li>
-        </ul>
-      </nav>
-    </div>
-    <div class="grid search">
-      <form action="" method="get"><label for="search">Search</label><input type="text" id="search" /><input type="submit" value="Search" /></form>
-    </div>
-  </header>
-  <main class="page-content js-page-content">
+<app-header></app-header>
+  <main class="page-content js-page-content" *ngIf="articles && articles.length > 0">
     <section class="articles wrapper">
       <div class="grid">
   
@@ -39,9 +22,9 @@
                 <!-- img src="https://source.unsplash.com/WLUHO9A_xik/1090x1090" alt="Quis aute iure reprehenderit in voluptate velit esse" / -->
               </picture>
             </figure>
-            <div class="description">
-              <h2 class="headline"><span class="trumpet">Quis aute iure reprehenderit:</span> In voluptate velit esse</h2>
-              <p class="intro">Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
+            <div class="description" *ngIf="articles && articles.length > 0">
+              <h2 class="headline"><span class="trumpet">{{articles[0].title}}</span> </h2>
+              <p class="intro">{{articles[0].contents}}</p>
             </div>
           </a>
         </article>
@@ -57,9 +40,9 @@
                 <!-- img src="https://source.unsplash.com/WLUHO9A_xik/1090x1090" alt="Quis aute iure reprehenderit in voluptate velit esse" / -->
               </picture>
             </figure>
-            <div class="description">
-              <h2 class="headline"><span class="trumpet">Quo usque tandem abutere:</span> Catilina, patientia nostra?</h2>
-              <p class="intro">Magna pars studiorum, prodita quaerimus. Donec sed odio operae, eu vulputate felis rhoncus.</p>
+            <div class="description" *ngIf="articles && articles.length > 0">
+              <h2 class="headline"><span class="trumpet">{{articles[1]?.title}}</span> </h2>
+              <p class="intro">{{articles[1]?.contents}}</p>
             </div>
           </a>
         </article>
@@ -76,8 +59,8 @@
               </picture>
             </figure>
             <div class="description">
-              <h2 class="headline">Ut enim ad minim veniam, quis nostrud exercitation.</h2>
-              <p class="intro">Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
+              <h2 class="headline">{{articles[2]?.title}}</h2>
+              <p class="intro">{{articles[2]?.contents}}</p>
             </div>
           </a>
         </article>
@@ -94,8 +77,8 @@
               </picture>
             </figure>
             <div class="description">
-              <h2 class="headline"><span class="trumpet">Quam temere in vitiis?</span> Legem sancimus haerentia.</h2>
-              <p class="intro">Donec sed odio operae, eu vulputate felis rhoncus. Petierunt uti sibi concilium totius Galliae in diem certam indicere.</p>
+              <h2 class="headline"><span class="trumpet">{{articles[3]?.title}}</span> </h2>
+              <p class="intro">{{articles[3]?.contents}}</p>
             </div>
           </a>
         </article>
@@ -112,8 +95,8 @@
               </picture>
             </figure>
             <div class="description">
-              <h2 class="headline">Quae vero auctorem tractata ab fiducia dicuntur.</h2>
-              <p class="intro">Vivamus sagittis lacus vel augue laoreet rutrum faucibus. Phasellus laoreet lorem vel dolor tempus vehicula.</p>
+              <h2 class="headline">{{articles[4]?.title}}</h2>
+              <p class="intro">{{articles[4]?.contents}}</p>
             </div>
           </a>
         </article>
@@ -130,8 +113,8 @@
               </picture>
             </figure>
             <div class="description">
-              <h2 class="headline">Qui ipsorum lingua Celtae, nostra Galli appellantur.</h2>
-              <p class="intro">Morbi odio eros, volutpat ut pharetra vitae, lobortis sed nibh. Plura mihi bona sunt, inclinet, amari petere vellent.</p>
+              <h2 class="headline">{{articles[5]?.title}}.</h2>
+              <p class="intro">{{articles[5]?.contents}}</p>
             </div>
           </a>
         </article>
@@ -148,8 +131,8 @@
               </picture>
             </figure>
             <div class="description">
-              <h2 class="headline">Ut enim ad minim veniam, quis nostrud exercitation.</h2>
-              <p class="intro">Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.
+              <h2 class="headline">{{articles[6]?.title}}</h2>
+              <p class="intro">{{articles[6]?.contents}}
             </div>
           </a>
         </article>
@@ -211,8 +194,8 @@
               </picture>
             </figure>
             <div class="description">
-              <h2 class="headline"><span class="trumpet">Quis aute iure reprehenderit:</span> In voluptate velit esse</h2>
-              <p class="intro">Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
+              <h2 class="headline"><span class="trumpet">{{topViews[0].title}}</span> </h2>
+              <p class="intro">{{topViews[2].contents}}</p>
             </div>
           </a>
         </article>
@@ -229,8 +212,8 @@
               </picture>
             </figure>
             <div class="description">
-              <h2 class="headline"><span class="trumpet">Quo usque tandem abutere:</span> Catilina, patientia nostra?</h2>
-              <p class="intro">Magna pars studiorum, prodita quaerimus. Donec sed odio operae, eu vulputate felis rhoncus.</p>
+              <h2 class="headline"><span class="trumpet">{{topViews[1].title}}</span> </h2>
+              <p class="intro">{{topViews[1].contents}}</p>
             </div>
           </a>
         </article>
@@ -247,8 +230,8 @@
               </picture>
             </figure>
             <div class="description">
-              <h2 class="headline">Ut enim ad minim veniam, quis nostrud exercitation.</h2>
-              <p class="intro">Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
+              <h2 class="headline">{{topViews[2].title}}</h2>
+              <p class="intro">{{topViews[2].contents}}</p>
             </div>
           </a>
         </article>
@@ -256,39 +239,4 @@
       </div>
     </section>
   </main>
-  <footer class="page-footer js-page-footer wrapper">
-    <div class="grid">
-      <section class="col-3 about">
-        <h3>The Hotspot Herald</h3>
-        <address>
-          <p>Tribune Street 1<br />33333 Guthenberg<br />
-            <a href="tel:+13115552368">(311) 555-2368</a>
-          </p>
-        </address>
-      </section>
-      <section class="col-3">
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="#">Come visit</a></li>
-          <li><a href="#">Find an employee</a></li>
-          <li><a href="#">Jobs</a></li>
-        </ul>
-      </section>
-      <section class="col-3">
-        <h4>Services</h4>
-        <ul>
-          <li><a href="#">Go grab the app</a></li>
-          <li><a href="#">Follow us on social media</a></li>
-          <li><a href="#">Newsletter</a></li>
-        </ul>
-      </section>
-      <section class="col-3">
-        <h4>About us</h4>
-        <ul>
-          <li><a href="#">Press releases</a></li>
-          <li><a href="#">The board</a></li>
-          <li><a href="#">Copyright</a></li>
-        </ul>
-      </section>
-    </div>
-  </footer>
+ 

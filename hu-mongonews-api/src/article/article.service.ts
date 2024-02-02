@@ -42,10 +42,15 @@ export class ArticleService {
     return this.articleModel.find().sort({ dateCreated: -1 }).limit(n).exec();
   }
 
-  update(id: number, updateArticleDto: Partial<Article>) {
-    return `This action updates a #${id} article`;
+ async incrementNumberOfViews(id: string) {
+    const article = await this.articleModel.findById(id);
+    article.numberOfViews++;
+    return article.save();
   }
-
+  async getNWithMostNumberOfViews(n:number){
+    const articles = await this.articleModel.find().sort({numberOfViews:-1}).limit(n).exec();
+    return articles;
+  }
   remove(id: number) {
     return `This action removes a #${id} article`;
   }
