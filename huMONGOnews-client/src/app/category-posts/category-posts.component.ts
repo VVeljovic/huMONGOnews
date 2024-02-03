@@ -23,7 +23,7 @@ constructor(private route:ActivatedRoute, private categoryService:CategoryServic
     this.categoryName = params.get('categoryName')||'';
     if(this.categoryName)
     {
-      this.categoryService.getPaginatedPosts(this.categoryName,1,3).subscribe((respo:any)=>{console.log(respo)
+      this.categoryService.getPaginatedPosts(this.categoryName,1,5).subscribe((respo:any)=>{console.log(respo)
       this.listOfArticles=respo.articles.articles;
       
       this.categoryService.setNumberOfArticles(respo.length);
@@ -40,7 +40,7 @@ constructor(private route:ActivatedRoute, private categoryService:CategoryServic
 }
 getPaginatedPosts(){
   console.log('a')
-  this.categoryService.getPaginatedPosts(this.categoryName,this.selectedNumber,3).subscribe((respo:any)=>{
+  this.categoryService.getPaginatedPosts(this.categoryName,this.selectedNumber,5).subscribe((respo:any)=>{
     
     this.listOfArticles=respo.articles.articles;
   })

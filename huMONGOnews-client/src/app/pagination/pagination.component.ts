@@ -12,12 +12,12 @@ import { CommonModule } from '@angular/common';
 })
 export class PaginationComponent {
   subscription:Subscription;
-  numberOfPages:number=10;
+  numberOfPages:number=0;
   pagesArray:number[]=[];
   constructor(private categoryService:CategoryService){
     this.subscription=this.categoryService.numberOfArticles.subscribe((respo)=>{
       console.log(respo);
-      this.numberOfPages=Math.ceil(respo/3);
+      this.numberOfPages=Math.ceil(respo/5);
      this.pagesArray=Array.from({ length: this.numberOfPages }, (_, i) => i + 1);
     })
   }

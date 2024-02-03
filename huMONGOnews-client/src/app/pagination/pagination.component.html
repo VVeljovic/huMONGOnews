@@ -1,4 +1,4 @@
-<ul class="pagination" style="width: 600px; margin: auto; text-align: center; margin-top: 10px;">
+<ul class="pagination" style="width: 600px; margin: auto; text-align: center; margin-top: 10px;" *ngIf="numberOfPages!=0">
     <li><a class="prev" style="cursor: pointer;" (click)=onPageNumberClick(-1) *ngIf="currentPage!=1">< Prev</a></li>
     <li class="pageNumber " [class.active]="currentPage === num" style="cursor: pointer;" *ngFor="let num of pagesArray"(click)=onPageNumberClick(num)>{{num}}</li>
    
