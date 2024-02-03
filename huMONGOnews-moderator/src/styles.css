@@ -194,3 +194,19 @@ button.toast-close-button {
     width: 25em;
   }
 }
+
+html, body {
+  margin: 0;
+}
+
+.icon-white > svg {
+  stroke: #fff;
+}
+
+.icon-grey > svg {
+  stroke: #ccc;
+}
+
+.icon-inverse > svg {
+  transform: scale(1, -1) rotate(90deg);
+}

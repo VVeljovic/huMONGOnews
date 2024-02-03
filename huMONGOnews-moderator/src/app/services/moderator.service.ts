@@ -29,6 +29,6 @@ export class ModeratorService {
       message: string;
       success: boolean;
       moderator: Moderator | undefined;
-    }>(`${environment.apiUrl}/moderator/${username}/${password}`);
+    }>(`${environment.apiUrl}/moderator/logIn/${username}/${password}`);
   }
 }

@@ -9,7 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ModeratorService } from '../services/moderator.service';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, catchError, takeUntil } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Router, RouterLink } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -71,17 +71,20 @@ export class LogInComponent implements OnInit, OnDestroy {
   onSubmit() {
     if (!this.loginForm.valid) {
       this.errMsg = [];
+
       if (!this.loginForm.get('username')?.valid) {
         this.errMsg.push(Error.username.pattern);
       }
+
       if (!this.loginForm.get('password')?.valid) {
         this.errMsg.push(Error.password.pattern);
       }
     } else {
       this.errMsg = [];
-      const { username, pass } = this.loginForm.value;
+      const { username, password } = this.loginForm.value;
+
       this.moderatorService
-        .logIn(username, pass)
+        .logIn(username, password)
         .pipe(takeUntil(this.onDestroy$))
         .subscribe((data) => {
           console.log(data);
@@ -89,12 +92,13 @@ export class LogInComponent implements OnInit, OnDestroy {
           if (data.success) {
             sessionStorage.setItem('moderator', JSON.stringify(data.moderator));
             this.toastr.success(data.message, 'Success');
+            this.router.navigate(['moderator-dashboard']);
           } else {
             this.toastr.error(data.message, 'Error');
-            this.router.navigate(['moderator-dashboard']);
           }
+
+          this.loginForm.reset();
         });
-      this.loginForm.reset();
     }
   }
 }

@@ -31,7 +31,7 @@ export class ModeratorService {
 
     if (!moderator)
       return {
-        message: 'Username not found!',
+        message: `Username "${username}" not found!`,
         success: false,
         moderator: undefined,
       };
