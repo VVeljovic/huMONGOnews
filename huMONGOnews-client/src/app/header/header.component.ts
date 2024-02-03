@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { CategoryService } from '../services/category.service';
 
 @Component({
   selector: 'app-header',
@@ -10,8 +12,18 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   showMoreOptions: boolean = false;
-
+  listOfCategories:any;
+  constructor(private router:Router, private categoryService:CategoryService){
+    this.categoryService.getCategoriesNames().subscribe((respo)=>{
+      this.listOfCategories= respo;
+     
+    });
+  }
   toggleMoreOptions() {
     this.showMoreOptions = !this.showMoreOptions;
+  }
+  navigateTo(path:string){
+    
+    this.router.navigate([`category/${path}`]);
   }
 }

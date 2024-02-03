@@ -16,16 +16,23 @@ export class CategoryController {
     return this.categoryService.findAll();
   }
 
-  @Get(':id')
+  @Get('id/:id')
   findOne(@Param('id') id: string) {
     return this.categoryService.findOne(id);
   }
-
+  @Get('byName/:id')
+  findByName(@Param('id') id: string) {
+    return this.categoryService.getCategoryByName(id);
+  }
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCategoryDto: Category) {
     return this.categoryService.update(+id, updateCategoryDto);
   }
-
+  @Get('categoryNames')
+  getCategoryNames() {
+    
+    return this.categoryService.getCategoryNames();
+  }
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.categoryService.remove(+id);

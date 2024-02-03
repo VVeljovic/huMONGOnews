@@ -5,13 +5,12 @@
       </div>
       <nav class="primary-navigation" aria-label="Primary Navigation">
         <ul class="nav-list">
-          <li><a href="#">Articles</a></li>
+          <li style="cursor: pointer;"><a href="#">Articles</a></li>
           <li><a href="#">Video</a></li>
-          <li class="more"><a (click)="toggleMoreOptions()">More</a>
+          <li style="cursor: pointer;"class="more"><a (click)="toggleMoreOptions()">Categories</a>
             <ul class="more-options" *ngIf="showMoreOptions">
-                <li style="width: 200px;">Option 1 haskjhda khdas k</li>
-                <li>Option 2</li>
-                <!-- Dodajte više opcija prema potrebi -->
+                <li style="width: 200px;" (click)="navigateTo(category)" *ngFor="let category of listOfCategories">{{category}}</li>
+               
               </ul>
         </li>
           <li class="search-icon"><a href="#">🔎</a></li>
