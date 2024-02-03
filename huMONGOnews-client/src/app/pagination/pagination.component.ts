@@ -16,7 +16,7 @@ export class PaginationComponent {
   pagesArray:number[]=[];
   constructor(private categoryService:CategoryService){
     this.subscription=this.categoryService.numberOfArticles.subscribe((respo)=>{
-      console.log(respo);
+     
       this.numberOfPages=Math.ceil(respo/5);
      this.pagesArray=Array.from({ length: this.numberOfPages }, (_, i) => i + 1);
     })

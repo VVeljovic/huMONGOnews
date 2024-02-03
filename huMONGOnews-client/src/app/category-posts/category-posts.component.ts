@@ -23,18 +23,18 @@ constructor(private route:ActivatedRoute, private categoryService:CategoryServic
     this.categoryName = params.get('categoryName')||'';
     if(this.categoryName)
     {
-      this.categoryService.getPaginatedPosts(this.categoryName,1,5).subscribe((respo:any)=>{console.log(respo)
+      this.categoryService.getPaginatedPosts(this.categoryName,1,5).subscribe((respo:any)=>{
       this.listOfArticles=respo.articles.articles;
       
       this.categoryService.setNumberOfArticles(respo.length);
-      console.log(this.listOfArticles);
+    
       
       })
     }
   })
   this.subscription = this.categoryService.pageNumberSelected.subscribe((respo)=>{
     this.selectedNumber=respo;
-    console.log(this.selectedNumber);
+    
     this.getPaginatedPosts();
   })
 }
