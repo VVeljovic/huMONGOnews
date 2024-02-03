@@ -11,7 +11,7 @@ import {
 import { ModeratorService } from '../services/moderator.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 const Error = {
@@ -33,6 +33,7 @@ const Error = {
     ReactiveFormsModule,
     FlexLayoutModule,
     HttpClientModule,
+    RouterLink,
   ],
   templateUrl: './log-in.component.html',
   styleUrl: './log-in.component.css',

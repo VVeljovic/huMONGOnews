@@ -16,5 +16,8 @@
     <input type="text" placeholder="Username" formControlName="username" />
     <input type="password" placeholder="Password" formControlName="password" />
     <button (click)="onSubmit()">Submit</button>
+    <p [routerLink]="['/sign-up']" routerLinkActive="router-link-active">
+      Don't have a profile? Sign up!
+    </p>
   </form>
 </div>

@@ -12,7 +12,7 @@ import {
 import { Moderator } from '../models/moderator.model';
 import { Subject, takeUntil } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ToastrService, provideToastr } from 'ngx-toastr';
 
@@ -43,6 +43,7 @@ const Error = {
     ReactiveFormsModule,
     FlexLayoutModule,
     HttpClientModule,
+    RouterLink,
   ],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css',

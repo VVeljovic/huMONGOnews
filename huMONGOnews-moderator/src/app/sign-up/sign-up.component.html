@@ -25,5 +25,8 @@
     <input type="text" placeholder="First Name" formControlName="firstName" />
     <input type="text" placeholder="Last Name" formControlName="lastName" />
     <button (click)="onSubmit()">Submit</button>
+    <p [routerLink]="['/log-in']" routerLinkActive="router-link-active">
+      Already signed up? Log in!
+    </p>
   </form>
 </div>
