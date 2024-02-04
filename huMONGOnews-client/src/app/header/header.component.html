@@ -6,7 +6,7 @@
       <nav class="primary-navigation" aria-label="Primary Navigation">
         <ul class="nav-list">
           <li style="cursor: pointer;"><a href="#">Articles</a></li>
-          <li><a href="#">Video</a></li>
+          <li style="cursor: pointer;" (click)="navigateTo('near')">Nearest to you</li>
           <li style="cursor: pointer;"class="more"><a (click)="toggleMoreOptions()">Categories</a>
             <ul class="more-options" *ngIf="showMoreOptions">
                 <li style="width: 200px;" (click)="navigateTo(category)" *ngFor="let category of listOfCategories">{{category}}</li>

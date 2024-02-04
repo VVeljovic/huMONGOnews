@@ -24,6 +24,7 @@ export class ArticleService {
   }
   async findArticlesWithinRange(longitude:number,latitude:number,maxRange:number,page:number = 1,limit:number = 3){
     const skipNumber = (page-1)*limit;
+    
     const articlesWithinRange = await this.articleModel.find({
       location:{
         $near:{
@@ -34,8 +35,16 @@ export class ArticleService {
           $maxDistance:maxRange
         }
       }
-    }).skip(skipNumber).limit(limit).exec();
-    return articlesWithinRange;
+    })
+    const totalArticles = articlesWithinRange.length;
+
+  
+  const paginatedArticles = articlesWithinRange.slice((page - 1) * limit, page * limit);
+
+  return {
+    articles: paginatedArticles,
+    total: totalArticles,
+  };
   }
   async findAll() {
     return await this.articleModel.find();
