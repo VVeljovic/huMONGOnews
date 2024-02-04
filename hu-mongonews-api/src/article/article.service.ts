@@ -15,13 +15,37 @@ export class ArticleService {
     const findCategory = await this.categoryModel.findById(categoryId);
     if (!findCategory) throw new HttpException('Category not found', 404);
     const createdArticle = new this.articleModel(createArticleDto);
-
+    console.log(createArticleDto.location)
+    
     const createdArticleSaved = await createdArticle.save();
     findCategory.articles.push(createdArticleSaved);
     await findCategory.save();
     return createdArticleSaved;
   }
+  async findArticlesWithinRange(longitude:number,latitude:number,maxRange:number,page:number = 1,limit:number = 3){
+    const skipNumber = (page-1)*limit;
+    
+    const articlesWithinRange = await this.articleModel.find({
+      location:{
+        $near:{
+          $geometry:{
+            type:'Point',
+            coordinates:[longitude,latitude],
+          },
+          $maxDistance:maxRange
+        }
+      }
+    })
+    const totalArticles = articlesWithinRange.length;
 
+  
+  const paginatedArticles = articlesWithinRange.slice((page - 1) * limit, page * limit);
+
+  return {
+    articles: paginatedArticles,
+    total: totalArticles,
+  };
+  }
   async findAll() {
     return await this.articleModel.find();
   }

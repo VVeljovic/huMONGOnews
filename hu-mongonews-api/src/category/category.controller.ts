@@ -32,6 +32,11 @@ export class CategoryController {
   findByName(@Param('id') id: string) {
     return this.categoryService.getCategoryByName(id);
   }
+  @Get('paginated/:name/:page/:limit')
+  getPaginatedPosts(@Param('name')name:string,@Param('page')page:number,@Param('limit')limit:number){
+    console.log(name,page,limit);
+    return this.categoryService.getPaginatedPosts(name,page,limit);
+  }
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCategoryDto: Category) {
     return this.categoryService.update(+id, updateCategoryDto);
@@ -44,4 +49,5 @@ export class CategoryController {
   remove(@Param('id') id: string) {
     return this.categoryService.remove(+id);
   }
+ 
 }

@@ -4,16 +4,22 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { ModeratorDashboardComponent } from './moderator-dashboard/moderator-dashboard.component';
 import { ArticlesContainerComponent } from './articles-container/articles-container.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { CreateArticleComponent } from './create-article/create-article.component';
 
 export const routes: Routes = [
   { path: 'log-in', pathMatch: 'full', component: LogInComponent },
   { path: 'sign-up', pathMatch: 'full', component: SignUpComponent },
   {
-    path: 'moderator-dashboard/:type',
+    path: 'moderator-dashboard',
     component: ModeratorDashboardComponent,
     children: [
+      { path: '', redirectTo: 'profile-page', pathMatch: 'full' },
       {
-        path: 'articles-container',
+        path: 'create-article',
+        component: CreateArticleComponent,
+      },
+      {
+        path: 'articles-container/:type',
         component: ArticlesContainerComponent,
       },
       { path: 'profile-page', component: ProfilePageComponent },

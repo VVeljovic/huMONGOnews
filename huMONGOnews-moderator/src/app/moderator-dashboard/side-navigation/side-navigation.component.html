@@ -8,11 +8,23 @@
 
 <div
   class="side-navigation__menu-button"
-  [routerLink]="['/moderator-dashboard', 'drafts', 'articles-container']"
+  [routerLink]="['/moderator-dashboard', 'create-article']"
   routerLinkActive="router-link-active"
 >
   <i-feather
     name="edit"
+    class="side-navigation__menu-button-icon icon-white"
+  ></i-feather>
+  <h3 class="side-navigation__menu-button-label">Create New</h3>
+</div>
+
+<div
+  class="side-navigation__menu-button"
+  [routerLink]="['/moderator-dashboard', 'articles-container', 'drafts']"
+  routerLinkActive="router-link-active"
+>
+  <i-feather
+    name="file-text"
     class="side-navigation__menu-button-icon icon-white"
   ></i-feather>
   <h3 class="side-navigation__menu-button-label">Drafts</h3>
@@ -20,7 +32,7 @@
 
 <div
   class="side-navigation__menu-button"
-  [routerLink]="['/moderator-dashboard', 'posts', 'articles-container']"
+  [routerLink]="['/moderator-dashboard', 'articles-container', 'posts']"
   routerLinkActive="router-link-active"
 >
   <i-feather

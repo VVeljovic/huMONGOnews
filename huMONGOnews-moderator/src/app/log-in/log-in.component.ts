@@ -92,7 +92,7 @@ export class LogInComponent implements OnInit, OnDestroy {
           if (data.success) {
             sessionStorage.setItem('moderator', JSON.stringify(data.moderator));
             this.toastr.success(data.message, 'Success');
-            this.router.navigate(['moderator-dashboard', 'drafts']);
+            this.router.navigate(['moderator-dashboard']);
           } else {
             this.toastr.error(data.message, 'Error');
           }

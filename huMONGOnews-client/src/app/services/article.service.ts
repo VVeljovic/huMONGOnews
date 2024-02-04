@@ -15,4 +15,12 @@ export class ArticleService {
   {
     return this.httpClient.get(`${environment.api}article/lastNWithMostViews/3`);
   }
+  nearestToYou(longitude:number,latitude:number,maxRange:number,skip:number,limit:number)
+  {
+    return this.httpClient.get(`${environment.api}article/findInRange/${longitude}/${latitude}/${maxRange}/${skip}/${limit}`);
+  }
+  getMyLocation()
+  {
+    return this.httpClient.get('https://ipapi.co/json/');
+  }
 }
