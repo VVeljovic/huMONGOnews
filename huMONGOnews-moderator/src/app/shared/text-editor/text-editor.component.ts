@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {
   HtmlEditorService,
   ImageService,
@@ -8,12 +9,13 @@ import {
   RichTextEditorModule,
   ToolbarService,
   RichTextEditor,
+  RichTextEditorComponent,
 } from '@syncfusion/ej2-angular-richtexteditor';
 
 @Component({
   selector: 'app-text-editor',
   standalone: true,
-  imports: [CommonModule, RichTextEditorModule],
+  imports: [CommonModule, RichTextEditorModule, FormsModule],
   templateUrl: './text-editor.component.html',
   styleUrl: './text-editor.component.css',
   providers: [
@@ -25,7 +27,10 @@ import {
   ],
 })
 export class TextEditorComponent implements OnInit {
-  private richTextEditor = new RichTextEditor();
+  public value: string | null = null;
+
+  @ViewChild('rte')
+  private richTextEditor!: RichTextEditorComponent;
 
   public tools: object = {
     items: [
@@ -79,11 +84,13 @@ export class TextEditorComponent implements OnInit {
     ],
   };
 
-  ngOnInit(): void {
-    this.richTextEditor.appendTo('#contents');
+  ngOnInit(): void {}
+
+  rteCreated(): void {
+    this.richTextEditor.insertImageSettings.saveFormat = 'Base64';
   }
 
-  public getHTMLValue(): string {
-    return this.richTextEditor.value;
+  public getHTMLValue(): string | null {
+    return this.value;
   }
 }

@@ -12,10 +12,10 @@
   routerLinkActive="router-link-active"
 >
   <i-feather
-    name="edit"
+    name="file-plus"
     class="side-navigation__menu-button-icon icon-white"
   ></i-feather>
-  <h3 class="side-navigation__menu-button-label">Create New</h3>
+  <h3 class="side-navigation__menu-button-label">New Draft</h3>
 </div>
 
 <div
@@ -40,6 +40,18 @@
     class="side-navigation__menu-button-icon icon-white"
   ></i-feather>
   <h3 class="side-navigation__menu-button-label">Posts</h3>
+</div>
+
+<div
+  class="side-navigation__menu-button"
+  [routerLink]="['/moderator-dashboard', 'articles-container', 'archived']"
+  routerLinkActive="router-link-active"
+>
+  <i-feather
+    name="archive"
+    class="side-navigation__menu-button-icon icon-white"
+  ></i-feather>
+  <h3 class="side-navigation__menu-button-label">Archived</h3>
 </div>
 
 <div class="bottom-buttons">

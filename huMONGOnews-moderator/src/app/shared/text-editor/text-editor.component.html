@@ -1,9 +1,9 @@
 <ejs-richtexteditor
-  id="defaultRTE"
+  #rte
+  height="95%"
+  (created)="rteCreated()"
+  [(value)]="value"
   [toolbarSettings]="tools"
   [quickToolbarSettings]="quickTools"
 >
-  <ng-template #contents>
-    <p>Start typing...</p>
-  </ng-template>
 </ejs-richtexteditor>

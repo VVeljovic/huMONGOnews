@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { Date, Document, HydratedDocument } from 'mongoose';
+import mongoose, { Date, HydratedDocument } from 'mongoose';
 import { Moderator } from 'src/moderator/moderator.schema';
 
 interface Location {
@@ -29,6 +29,12 @@ export class Article {
   @Prop(String)
   description: string;
 
+  @Prop(Boolean)
+  draft: boolean;
+
+  @Prop({ type: mongoose.Schema.Types.Mixed, index: { type: '2dsphere' } })
+  location: Location;
+
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Moderator', index: true })
   moderator: Moderator;
 
@@ -37,9 +43,6 @@ export class Article {
 
   @Prop(String)
   categoryId: string;
-
-  @Prop({ type: mongoose.Schema.Types.Mixed, index: { type: '2dsphere' } })
-  location: Location;
 }
 
 export const ArticleSchema = SchemaFactory.createForClass(Article);
