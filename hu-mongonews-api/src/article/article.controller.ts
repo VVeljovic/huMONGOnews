@@ -59,4 +59,9 @@ export class ArticleController {
   async getLastNArticles(@Param('n') n: number) {
     return this.articleService.getLastNArticles(n);
   }
+  @Get('findInRange/:longitude/:latitude/:maxDistance/:page/:limit')
+  async findInRange(@Param('longitude')longitude:number,@Param('latitude')latitude:number,@Param('maxDistance')maxDistance:number,@Param('page')page:number,@Param('limit')limit:number)
+  {
+    return this.articleService.findArticlesWithinRange(+longitude,+latitude,+maxDistance,+page,+limit);
+  }
 }
