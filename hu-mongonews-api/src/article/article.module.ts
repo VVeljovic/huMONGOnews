@@ -13,9 +13,9 @@ import { Category, CategorySchema } from 'src/category/category.schema';
         schema: ArticleSchema,
       },
       {
-        name:Category.name,
-        schema:CategorySchema,
-      }
+        name: Category.name,
+        schema: CategorySchema,
+      },
     ]),
   ],
   controllers: [ArticleController],

@@ -9,7 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ModeratorService } from '../services/moderator.service';
-import { Subject, catchError, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Router, RouterLink } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -92,7 +92,7 @@ export class LogInComponent implements OnInit, OnDestroy {
           if (data.success) {
             sessionStorage.setItem('moderator', JSON.stringify(data.moderator));
             this.toastr.success(data.message, 'Success');
-            this.router.navigate(['moderator-dashboard']);
+            this.router.navigate(['moderator-dashboard', 'drafts']);
           } else {
             this.toastr.error(data.message, 'Error');
           }

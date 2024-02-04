@@ -13,8 +13,7 @@ import { Moderator } from '../models/moderator.model';
 import { Subject, takeUntil } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
-import { provideAnimations } from '@angular/platform-browser/animations';
-import { ToastrService, provideToastr } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 const Error = {
   username: {

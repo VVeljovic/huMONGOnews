@@ -41,7 +41,7 @@ export class ArticleController {
   }
   @Get('lastNWithMostViews/:n')
   async getLastNWithMostViews(@Param('n') n: number) {
-    console.log('a')
+    console.log('a');
     return await this.articleService.getNWithMostNumberOfViews(n);
   }
 

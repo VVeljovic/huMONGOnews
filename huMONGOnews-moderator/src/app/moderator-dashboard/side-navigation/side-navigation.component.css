@@ -1,5 +1,6 @@
 :host {
   display: flex;
+  flex-direction: column;
   width: 50px;
   height: 100vh;
   background: linear-gradient(to bottom, #4f709c 0%, #213555 100%);
@@ -29,4 +30,9 @@
   color: #fff;
   font-weight: 500;
   font-size: 18px;
+}
+
+.bottom-buttons {
+  margin-top: auto;
+  margin-bottom: 0px;
 }

@@ -42,13 +42,17 @@ export class ArticleService {
     return this.articleModel.find().sort({ dateCreated: -1 }).limit(n).exec();
   }
 
- async incrementNumberOfViews(id: string) {
+  async incrementNumberOfViews(id: string) {
     const article = await this.articleModel.findById(id);
     article.numberOfViews++;
     return article.save();
   }
-  async getNWithMostNumberOfViews(n:number){
-    const articles = await this.articleModel.find().sort({numberOfViews:-1}).limit(n).exec();
+  async getNWithMostNumberOfViews(n: number) {
+    const articles = await this.articleModel
+      .find()
+      .sort({ numberOfViews: -1 })
+      .limit(n)
+      .exec();
     return articles;
   }
   remove(id: number) {
