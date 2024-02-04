@@ -19,4 +19,8 @@ export class ArticleService {
   {
     return this.httpClient.get(`${environment.api}article/findInRange/${longitude}/${latitude}/${maxRange}/${skip}/${limit}`);
   }
+  getMyLocation()
+  {
+    return this.httpClient.get('https://ipapi.co/json/');
+  }
 }

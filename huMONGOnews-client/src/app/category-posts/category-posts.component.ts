@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from '../services/category.service';
@@ -14,12 +14,17 @@ import { ArticleService } from '../services/article.service';
   templateUrl: './category-posts.component.html',
   styleUrl: './category-posts.component.css'
 })
-export class CategoryPostsComponent {
+export class CategoryPostsComponent implements OnInit{
   listOfArticles:any;
   subscription:Subscription;
   selectedNumber:number = 1;
   categoryName:string='';
+  longitude:number=0;
+  latitude:number=0;
 constructor(private route:ActivatedRoute, private categoryService:CategoryService, private articleService:ArticleService){
+
+
+
   this.route.paramMap.subscribe(params=>{
     this.categoryName = params.get('categoryName')||'';
     if(this.categoryName!='near')
@@ -34,11 +39,23 @@ constructor(private route:ActivatedRoute, private categoryService:CategoryServic
     }
     else if(this.categoryName=='near')
     {
-      this.articleService.nearestToYou(19.8335,45.2671,100000,1,5).subscribe((respo:any)=>{
-        this.listOfArticles=respo.articles
-        console.log(respo)
-        this.categoryService.setNumberOfArticles(respo.total);
-      })
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.latitude = position.coords.latitude;
+           this.longitude = position.coords.longitude;
+      
+          console.log('Latitude:', this.latitude);
+          console.log('Longitude:', this.longitude);
+          this.articleService.nearestToYou(this.longitude,this.latitude,500000,1,5).subscribe((respo:any)=>{
+            this.listOfArticles=respo.articles
+            console.log(respo)
+            this.categoryService.setNumberOfArticles(respo.total);
+          })
+        }
+          
+          )
+      
+      
     }
   })
   
@@ -56,6 +73,10 @@ constructor(private route:ActivatedRoute, private categoryService:CategoryServic
    }
   })
 }
+ngOnInit(): void {
+ // this.articleService.getMyLocation().subscribe((response)=>{console.log(response)})
+ 
+}
 getPaginatedPosts(){
  
   this.categoryService.getPaginatedPosts(this.categoryName,this.selectedNumber,5).subscribe((respo:any)=>{
@@ -65,6 +86,6 @@ getPaginatedPosts(){
 }
 getPaginatedGeoJson()
 {
-  this.articleService.nearestToYou(19.8335,45.2671,100000,this.selectedNumber,5).subscribe((respo:any)=>{console.log(respo);this.listOfArticles=respo.articles})
+  this.articleService.nearestToYou(this.longitude,this.latitude,500000,this.selectedNumber,5).subscribe((respo:any)=>{console.log(respo);this.listOfArticles=respo.articles})
 }
 }
