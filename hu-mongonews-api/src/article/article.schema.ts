@@ -7,30 +7,38 @@ interface Location {
   coordinates: number[]; // [longitude, latitude]
 }
 
+// Define the possible states
+export type ArticleState = 'DRAFT' | 'POST' | 'ARCHIVE';
+
 export type ArticleDocument = HydratedDocument<Article>;
 
 @Schema()
 export class Article {
-  @Prop({ type: String, index: true })
+  @Prop({ type: String, unique: true, index: true })
   title: string;
 
   @Prop(String)
   titleImage: string; // base64 encoded
 
   @Prop(String)
-  contents: string;
-
-  @Prop([String])
-  contentImages: string[]; // base64 encoded
+  contents: string; // HTML format
 
   @Prop({ type: Date })
   dateCreated: Date;
 
+  @Prop({ type: Date, default: null })
+  dateStateUpdated: Date;
+
   @Prop(String)
   description: string;
 
-  @Prop(Boolean)
-  draft: boolean;
+  @Prop({
+    type: String,
+    enum: ['DRAFT', 'POST', 'ARCHIVE'],
+    default: 'DRAFT',
+    index: true,
+  })
+  state: ArticleState;
 
   @Prop({ type: mongoose.Schema.Types.Mixed, index: { type: '2dsphere' } })
   location: Location;

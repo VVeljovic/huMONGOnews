@@ -9,7 +9,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { ArticleService } from './article.service';
-import { Article } from './article.schema';
+import { Article, ArticleState } from './article.schema';
 
 @Controller('article')
 export class ArticleController {
@@ -50,6 +50,14 @@ export class ArticleController {
     return this.articleService.incrementNumberOfViews(id);
   }
 
+  @Patch('patchState/:id/:state')
+  async patchArticleState(
+    @Param('id') id: string,
+    @Param('state') state: ArticleState,
+  ) {
+    return await this.articleService.patchArticleState(id, state);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.articleService.remove(+id);
@@ -59,9 +67,21 @@ export class ArticleController {
   async getLastNArticles(@Param('n') n: number) {
     return this.articleService.getLastNArticles(n);
   }
+
   @Get('findInRange/:longitude/:latitude/:maxDistance/:page/:limit')
-  async findInRange(@Param('longitude')longitude:number,@Param('latitude')latitude:number,@Param('maxDistance')maxDistance:number,@Param('page')page:number,@Param('limit')limit:number)
-  {
-    return this.articleService.findArticlesWithinRange(+longitude,+latitude,+maxDistance,+page,+limit);
+  async findInRange(
+    @Param('longitude') longitude: number,
+    @Param('latitude') latitude: number,
+    @Param('maxDistance') maxDistance: number,
+    @Param('page') page: number,
+    @Param('limit') limit: number,
+  ) {
+    return this.articleService.findArticlesWithinRange(
+      +longitude,
+      +latitude,
+      +maxDistance,
+      +page,
+      +limit,
+    );
   }
 }

@@ -23,6 +23,7 @@
     "@syncfusion/ej2-angular-richtexteditor": "^24.2.3",
     "angular-feather": "^6.5.1",
     "ngx-toastr": "^18.0.0",
+    "primeng": "^17.5.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
