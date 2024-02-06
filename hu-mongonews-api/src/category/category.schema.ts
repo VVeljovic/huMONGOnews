@@ -12,5 +12,7 @@ export class Category {
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Article' }] })
   articles: Article[];
+
+
 }
 export const CategorySchema = SchemaFactory.createForClass(Category);

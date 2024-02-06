@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ArticleModule } from './article/article.module';
 import { ModeratorModule } from './moderator/moderator.module';
 import { CategoryModule } from './category/category.module';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { CategoryModule } from './category/category.module';
     ArticleModule,
     ModeratorModule,
     CategoryModule,
+    CommentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

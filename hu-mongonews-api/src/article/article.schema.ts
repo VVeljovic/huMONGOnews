@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Date, HydratedDocument } from 'mongoose';
+import { Comment } from 'src/comment/comment.schema';
 import { Moderator } from 'src/moderator/moderator.schema';
 
 interface Location {
@@ -46,6 +47,8 @@ export class Article {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Moderator', index: true })
   moderator: Moderator;
 
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }] })
+  comments: Comment[];
   @Prop(Number)
   numberOfViews: number;
 

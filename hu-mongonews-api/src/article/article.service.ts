@@ -59,7 +59,10 @@ export class ArticleService {
   }
 
   async findOne(id: string) {
-    return await this.articleModel.findById(id);
+    return await this.articleModel.findById(id).populate({
+      path: 'comments',
+      populate: { path: 'comments' } 
+    });
   }
 
   async findOneByTitle(title: string) {
