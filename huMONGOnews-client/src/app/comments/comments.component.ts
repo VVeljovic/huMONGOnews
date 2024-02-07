@@ -13,7 +13,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 export class CommentsComponent {
   @ViewChild('textarea', { static: false }) textarea!: ElementRef;
   @ViewChild('textarea2', { static: false }) textarea2!: ElementRef;
-
+ email:string='';
   comments:any;
   clicked:boolean[] = [];
   constructor(private commentService:CommentService){
@@ -24,14 +24,21 @@ export class CommentsComponent {
     })
   }
   sendComment() {
+    
+    console.log(this.email);
     const text = this.textarea.nativeElement.innerText;
     const comment = {
       content:text,
       dateCreated:Date.now(),
-      userEmail:"vveljovic13@gmail.com",
+      userEmail:this.email,
       articleId:'65bf77100d164175c563b1ac'
     }
-    this.commentService.sendComment(comment).subscribe((respo)=>{this.comments.push(respo)});
+    this.commentService.sendComment(comment).subscribe((respo)=>{this.comments.push(respo)
+    this.email = "";
+    this.textarea.nativeElement.innerText="";
+    }
+    
+    );
    
   }
  
@@ -51,11 +58,15 @@ export class CommentsComponent {
     const comment = {
       content:text,
       dateCreated:Date.now(),
-      userEmail:'vveljovic',
+      userEmail:this.email,
       articleId:'65bf77100d164175c563b1ac',
       commentId:this.comments[i]._id
     }
-    this.commentService.sendSubComm(comment).subscribe((respo)=>{console.log(this.comments[i].comments.push(respo))})
+    this.commentService.sendSubComm(comment).subscribe((respo)=>{console.log(this.comments[i].comments.push(respo))
+    
+    this.email="";
+    this.textarea2.nativeElement.innerText="";
+    })
 
   }
 }

@@ -32,8 +32,15 @@
 				<button class="btn primary"(click)="sendComment()">Send</button>
 			</div>
 		</div>
+		
 	</div>
-	
+	<input style=" padding: 10px;
+		margin-bottom: 12px;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		transition: border-color 0.3s ease-in-out;
+		outline: none;
+		color: #333;" type="text" id="email" name="email" placeholder="Email" required [(ngModel)]="email">
 	<div *ngFor="let comment of comments; let i =index">
 		<div class="comment">
 			<div class="user-banner">
@@ -74,6 +81,13 @@
 				</div>
 			</div>
 		</div>
+		<input style=" padding: 10px;
+		margin-bottom: 12px;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		transition: border-color 0.3s ease-in-out;
+		outline: none;
+		color: #333;" type="text" id="email" name="email" placeholder="Email" required [(ngModel)]="email" *ngIf="clicked[i]">
 		<div class="reply comment" *ngFor="let subComm of comment.comments">
 			<div class="user-banner">
 				<div class="user">
