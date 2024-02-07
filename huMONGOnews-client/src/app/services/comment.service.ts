@@ -12,4 +12,12 @@ export class CommentService {
   {
     return this.httpClient.get(`${environment.api}article/${postId}`)
   }
+  sendComment(comment:any)
+  {
+    return this.httpClient.post(`${environment.api}comment`,comment);
+  }
+  sendSubComm(comment:any)
+  {
+    return this.httpClient.post(`${environment.api}comment/createSubComment`,comment);
+  }
 }
