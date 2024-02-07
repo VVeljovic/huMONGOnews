@@ -44,7 +44,7 @@ export class CommentService {
     else
     {
       return findArticle.populate({
-        path:'comments',
+        path:'comments', options: { sort: { dateCreated: 1 } },
         populate: { path: 'comments' } 
       })
     }

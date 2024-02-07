@@ -23,7 +23,11 @@ export class CommentController {
   findOne(@Param('id') id: string) {
     return this.commentService.findOne(id);
   }
-
+  @Get('commentsForArticles/:id')
+  commentsForArticles(@Param('id')id:string)
+  {
+    return this.commentService.getCommentForArticle(id);
+  }
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCommentDto: Comment) {
     return this.commentService.update(+id, updateCommentDto);
