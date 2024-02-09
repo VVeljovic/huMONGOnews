@@ -1,0 +1,17 @@
+.file-input {
+  display: none;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px; /* Adjust the padding as needed */
+  margin-bottom: 10px; /* Add margin between cards */
+  width: 100%; /* Ensure all cards have the same width */
+}
+
+.card > * {
+  width: 100%;
+}

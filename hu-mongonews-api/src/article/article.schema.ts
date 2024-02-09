@@ -49,7 +49,8 @@ export class Article {
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }] })
   comments: Comment[];
-  @Prop(Number)
+
+  @Prop({ type: Number, default: 0 })
   numberOfViews: number;
 
   @Prop(String)

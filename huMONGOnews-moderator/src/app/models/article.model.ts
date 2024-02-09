@@ -1,17 +1,20 @@
+import { Location } from './location.model';
 import { Moderator } from './moderator.model';
 
 export type ArticleState = 'DRAFT' | 'POST' | 'ARCHIVE';
 
 export interface Article {
-  readonly title: string;
-  readonly titleImage: string; // base64 encoded
-  readonly contents: string; // HTML format
-  readonly dateCreated: Date;
-  readonly dateStateUpdated: Date;
-  readonly description: string;
-  readonly state: ArticleState;
-  readonly location: Location;
-  readonly moderator: Moderator;
-  readonly numberOfViews: number;
-  readonly categoryId: string;
+  title: string;
+  titleImage: string; // base64 encoded
+  contents: string; // HTML format
+  dateCreated: Date;
+  dateStateUpdated: Date;
+  description: string;
+  state: ArticleState;
+  location: Location;
+  moderator: string;
+  numberOfViews: number;
+  categoryId: string;
 }
+
+export type ReadonlyArticle = Readonly<Article>;
