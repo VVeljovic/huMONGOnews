@@ -16,7 +16,7 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'profile-page', pathMatch: 'full' },
       {
-        path: 'create-article',
+        path: 'create-article/:id',
         component: CreateArticleComponent,
       },
       {
@@ -25,11 +25,6 @@ export const routes: Routes = [
       },
       { path: 'profile-page', component: ProfilePageComponent },
     ],
-  },
-  {
-    path: 'article-metadata-form-test',
-    pathMatch: 'full',
-    component: ArticleMetadataFormComponent,
   },
   { path: '', pathMatch: 'full', redirectTo: 'log-in' },
 ];

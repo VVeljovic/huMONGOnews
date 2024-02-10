@@ -12,9 +12,6 @@ export class CategoryService {
     return await createdCategory.save();
   }
 
-  findAll() {
-    return `This action returns all category`;
-  }
   async getCategoryByName(name: string) {
     const category = await this.categoryModel.findOne({ name });
     if (category) {
@@ -23,13 +20,20 @@ export class CategoryService {
       throw new HttpException('Article does not founded', 404);
     }
   }
+
   async findOne(id: string) {
     return await this.categoryModel.findById(id).populate('articles');
   }
+
+  async findAll() {
+    return await this.categoryModel.find();
+  }
+
   async getCategoryNames() {
     const categories = await this.categoryModel.find().exec();
     return categories.map((cat) => cat.name);
   }
+
   async getPaginatedPosts(name: string, page: number = 1, limit: number = 3) {
     const category = await this.categoryModel.findOne({ name });
     if (category) {
@@ -47,13 +51,5 @@ export class CategoryService {
     } else {
       throw new HttpException('Category does not exist', 404);
     }
-  }
-
-  update(id: number, updateCategoryDto: Category) {
-    return `This action updates a #${id} category`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} category`;
   }
 }

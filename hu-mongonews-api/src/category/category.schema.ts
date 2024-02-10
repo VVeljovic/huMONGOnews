@@ -4,7 +4,7 @@ import { Article } from 'src/article/article.schema';
 
 @Schema()
 export class Category {
-  @Prop({ type: String })
+  @Prop({ type: String, unique: true })
   name: string;
 
   @Prop({ description: String })
@@ -12,7 +12,5 @@ export class Category {
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Article' }] })
   articles: Article[];
-
-
 }
 export const CategorySchema = SchemaFactory.createForClass(Category);

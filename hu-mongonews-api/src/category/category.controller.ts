@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { Category } from './category.schema';
 
@@ -20,8 +12,8 @@ export class CategoryController {
   }
 
   @Get()
-  findAll() {
-    return this.categoryService.findAll();
+  async findAll() {
+    return await this.categoryService.findAll();
   }
 
   @Get('id/:id')
@@ -33,21 +25,17 @@ export class CategoryController {
     return this.categoryService.getCategoryByName(id);
   }
   @Get('paginated/:name/:page/:limit')
-  getPaginatedPosts(@Param('name')name:string,@Param('page')page:number,@Param('limit')limit:number){
-    console.log(name,page,limit);
-    return this.categoryService.getPaginatedPosts(name,page,limit);
+  getPaginatedPosts(
+    @Param('name') name: string,
+    @Param('page') page: number,
+    @Param('limit') limit: number,
+  ) {
+    console.log(name, page, limit);
+    return this.categoryService.getPaginatedPosts(name, page, limit);
   }
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCategoryDto: Category) {
-    return this.categoryService.update(+id, updateCategoryDto);
-  }
+
   @Get('categoryNames')
   getCategoryNames() {
     return this.categoryService.getCategoryNames();
   }
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.categoryService.remove(+id);
-  }
- 
 }

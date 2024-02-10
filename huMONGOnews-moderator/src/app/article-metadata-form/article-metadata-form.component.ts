@@ -9,13 +9,21 @@ import {
 } from 'rxjs';
 import { FileUploadModule } from 'primeng/fileupload';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { Article } from '../models/article.model';
 import { HttpClient } from '@angular/common/http';
-import { AutoCompleteModule } from 'primeng/autocomplete';
+import { AutoCompleteModule, AutoComplete } from 'primeng/autocomplete';
 import { environment } from '../../environments/environment.development';
 import { GeoObject } from '../models/geo-object.model';
 import { ToastrService } from 'ngx-toastr';
@@ -64,7 +72,11 @@ export class ArticleMetadataFormComponent implements OnInit {
   @Input()
   public article: Article = {} as Article;
 
-  constructor(private http: HttpClient, private toastr: ToastrService) {}
+  constructor(
+    private http: HttpClient,
+    private toastr: ToastrService,
+    private renderer: Renderer2
+  ) {}
 
   ngOnInit(): void {
     this.suggestions$ = this.queryString$.pipe(

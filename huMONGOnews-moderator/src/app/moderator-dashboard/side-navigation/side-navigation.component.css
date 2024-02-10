@@ -1,3 +1,11 @@
+
+@import "primeicons/primeicons.css";
+
+.prime-button {
+  font-size: 1.5rem;
+  color: white;
+}
+
 :host {
   display: flex;
   flex-direction: column;
@@ -35,4 +43,18 @@
 .bottom-buttons {
   margin-top: auto;
   margin-bottom: 0px;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.card > * {
+  width: 100%;
 }

@@ -1,62 +1,77 @@
-<div class="card flex justify-content-center">
-  <input
-    type="text"
-    placeholder="Title"
-    pInputText
-    id="title"
-    required
-    [(ngModel)]="article.title"
-  />
-</div>
+<form #articleForm="ngForm" name="articleForm">
+  <div class="card flex justify-content-center">
+    <input
+      name="title"
+      type="text"
+      placeholder="Title"
+      pInputText
+      id="title"
+      [required]="true"
+      [(ngModel)]="article.title"
+    />
+  </div>
 
-<div class="card flex justify-content-center">
-  <p-fileUpload
-    (onSelect)="onSelect($event)"
-    (onClear)="onClear()"
-    (onRemove)="onRemove($event)"
-    [showUploadButton]="false"
-    cancelLabel="Clear"
-    accept="image/*"
-    [fileLimit]="1"
-    [maxFileSize]="2097152"
-  >
-    <ng-template pTemplate="content">
-      <ul *ngIf="selectedFiles as files">
-        <li *ngFor="let file of files">
-          {{ file.name }} - {{ file.size }} bytes
-        </li>
-      </ul>
-    </ng-template>
-  </p-fileUpload>
-</div>
+  <div class="card flex justify-content-center">
+    <p-fileUpload
+      name="titleImage"
+      (onSelect)="onSelect($event)"
+      (onClear)="onClear()"
+      (onRemove)="onRemove($event)"
+      [showUploadButton]="false"
+      cancelLabel="Clear"
+      accept="image/*"
+      [fileLimit]="1"
+      [maxFileSize]="2097152"
+    >
+      <ng-template pTemplate="content">
+        <ul *ngIf="selectedFiles as files">
+          <li *ngFor="let file of files">
+            {{ file.name }} - {{ file.size }} bytes
+          </li>
+        </ul>
+      </ng-template>
+    </p-fileUpload>
+  </div>
 
-<div class="card flex justify-content-center">
-  <textarea
-    rows="5"
-    cols="30"
-    placeholder="Description"
-    pInputTextarea
-    [(ngModel)]="article.description"
-    [autoResize]="true"
-  ></textarea>
-</div>
+  <div class="card flex justify-content-center">
+    <textarea
+      name="description"
+      rows="5"
+      cols="30"
+      placeholder="Description"
+      pInputTextarea
+      [required]="true"
+      [(ngModel)]="article.description"
+      [autoResize]="true"
+    ></textarea>
+  </div>
 
-<div class="card flex justify-content-center">
-  <p-autoComplete
-    (onKeyUp)="getSuggestions($event)"
-    [(ngModel)]="selectedItem"
-    field="name"
-    [suggestions]="(suggestions$ | async) ?? []"
-    (onSelect)="saveLonLat($event)"
-  ></p-autoComplete>
-</div>
+  <div class="card flex justify-content-center">
+    <p-autoComplete
+      name="city"
+      appendTo="body"
+      [style]="{ width: '100%' }"
+      [inputStyle]="{ width: '100%' }"
+      class="p-autocomplete"
+      [required]="true"
+      (onKeyUp)="getSuggestions($event)"
+      [(ngModel)]="selectedItem"
+      field="name"
+      [suggestions]="(suggestions$ | async) ?? []"
+      (onSelect)="saveLonLat($event)"
+      placeholder="Enter a place"
+    ></p-autoComplete>
+  </div>
 
-<div class="card flex justify-content-center">
-  <button
-    (click)="onSubmit()"
-    pButton
-    pRipple
-    label="Submit"
-    class="p-button-success"
-  ></button>
-</div>
+  <div class="card flex justify-content-center">
+    <button
+      name="submit"
+      (click)="onSubmit()"
+      pButton
+      pRipple
+      label="Submit"
+      class="p-button-success"
+      [disabled]="!articleForm.valid"
+    ></button>
+  </div>
+</form>

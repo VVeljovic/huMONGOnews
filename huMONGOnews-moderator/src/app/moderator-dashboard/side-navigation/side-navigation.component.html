@@ -1,21 +1,61 @@
 <div class="side-navigation__menu-button" (click)="toggleSidebar()">
-  <i-feather
-    name="menu"
-    class="side-navigation__menu-button-icon icon-white"
-  ></i-feather>
+  <i class="pi pi-bars prime-button side-navigation__menu-button-icon"></i>
   <h3 class="side-navigation__menu-button-label">Menu</h3>
 </div>
 
-<div
-  class="side-navigation__menu-button"
-  [routerLink]="['/moderator-dashboard', 'create-article']"
-  routerLinkActive="router-link-active"
->
-  <i-feather
-    name="file-plus"
-    class="side-navigation__menu-button-icon icon-white"
-  ></i-feather>
+<div class="side-navigation__menu-button" (click)="createNewArticleDraft()">
+  <i class="pi pi-plus prime-button side-navigation__menu-button-icon"></i>
   <h3 class="side-navigation__menu-button-label">New Draft</h3>
+</div>
+
+<div class="side-navigation__menu-button" (click)="showDialog()">
+  <i class="pi pi-tag prime-button side-navigation__menu-button-icon"></i>
+  <h3 class="side-navigation__menu-button-label">New Category</h3>
+  <p-dialog
+    header="Enter category info"
+    (onHide)="hideDialog()"
+    [modal]="true"
+    [closeOnEscape]="true"
+    [(visible)]="visible"
+    [style]="{ width: '50vw' }"
+  >
+    <form #categoryForm="ngForm" name="categoryForm">
+      <div class="card flex justify-content-center">
+        <input
+          type="text"
+          name="categoryName"
+          placeholder="Category Name"
+          pInputText
+          id="categoryName"
+          [(ngModel)]="category.name"
+          [required]="true"
+        />
+      </div>
+      <div class="card flex justify-content-center">
+        <textarea
+          name="categoryDescription"
+          rows="5"
+          cols="30"
+          placeholder="Description"
+          pInputTextarea
+          [required]="true"
+          [autoResize]="true"
+          [(ngModel)]="category.description"
+        ></textarea>
+      </div>
+      <div class="card flex justify-content-center">
+        <button
+          name="createCategory"
+          (click)="createCategory(categoryForm)"
+          pButton
+          pRipple
+          label="Submit"
+          class="p-button-success"
+          [disabled]="!categoryForm.valid"
+        ></button>
+      </div>
+    </form>
+  </p-dialog>
 </div>
 
 <div
@@ -23,10 +63,7 @@
   [routerLink]="['/moderator-dashboard', 'articles-container', 'drafts']"
   routerLinkActive="router-link-active"
 >
-  <i-feather
-    name="file-text"
-    class="side-navigation__menu-button-icon icon-white"
-  ></i-feather>
+  <i class="pi pi-file-edit prime-button side-navigation__menu-button-icon"></i>
   <h3 class="side-navigation__menu-button-label">Drafts</h3>
 </div>
 
@@ -35,23 +72,10 @@
   [routerLink]="['/moderator-dashboard', 'articles-container', 'posts']"
   routerLinkActive="router-link-active"
 >
-  <i-feather
-    name="check-circle"
-    class="side-navigation__menu-button-icon icon-white"
-  ></i-feather>
+  <i
+    class="pi pi-check-square prime-button side-navigation__menu-button-icon"
+  ></i>
   <h3 class="side-navigation__menu-button-label">Posts</h3>
-</div>
-
-<div
-  class="side-navigation__menu-button"
-  [routerLink]="['/moderator-dashboard', 'articles-container', 'archived']"
-  routerLinkActive="router-link-active"
->
-  <i-feather
-    name="archive"
-    class="side-navigation__menu-button-icon icon-white"
-  ></i-feather>
-  <h3 class="side-navigation__menu-button-label">Archived</h3>
 </div>
 
 <div class="bottom-buttons">
@@ -60,18 +84,14 @@
     [routerLink]="['/moderator-dashboard', 'profile-page']"
     routerLinkActive="router-link-active"
   >
-    <i-feather
-      name="user"
-      class="side-navigation__menu-button-icon icon-white"
-    ></i-feather>
+    <i class="pi pi-user prime-button side-navigation__menu-button-icon"></i>
     <h3 class="side-navigation__menu-button-label">Profile</h3>
   </div>
 
   <div class="side-navigation__menu-button" (click)="logOut()">
-    <i-feather
-      name="log-out"
-      class="side-navigation__menu-button-icon icon-white"
-    ></i-feather>
+    <i
+      class="pi pi-sign-out prime-button side-navigation__menu-button-icon"
+    ></i>
     <h3 class="side-navigation__menu-button-label">Log Out</h3>
   </div>
 </div>
