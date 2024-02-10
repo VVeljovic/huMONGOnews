@@ -60,8 +60,9 @@ export class ArticleService {
 
   async findOne(id: string) {
     return await this.articleModel.findById(id).populate({
-      path: 'comments',options: { sort: { dateCreated: -1 } },
-      populate: { path: 'comments' } 
+      path: 'comments',
+      options: { sort: { dateCreated: -1 } },
+      populate: { path: 'comments' },
     });
   }
 

@@ -1,33 +1,33 @@
 import {
   Observable,
   Subject,
+  catchError,
   debounceTime,
   distinctUntilChanged,
   filter,
   map,
+  EMPTY,
   switchMap,
+  takeUntil,
+  tap,
 } from 'rxjs';
 import { FileUploadModule } from 'primeng/fileupload';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Input,
-  OnInit,
-  Renderer2,
-  ViewChild,
-} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { Article } from '../models/article.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AutoCompleteModule, AutoComplete } from 'primeng/autocomplete';
 import { environment } from '../../environments/environment.development';
 import { GeoObject } from '../models/geo-object.model';
 import { ToastrService } from 'ngx-toastr';
 import { Moderator } from '../models/moderator.model';
+import { Category } from '../models/category.model';
+import { CategoryService } from '../services/category.service';
+import { Router } from '@angular/router';
+import { ArticleService } from '../services/article.service';
 
 interface SelectEvent {
   originalEvent: Event;
@@ -61,21 +61,25 @@ export type Base64String = string;
     FileUploadModule,
     InputTextModule,
     InputTextareaModule,
+    HttpClientModule,
     AutoCompleteModule,
     AsyncPipe,
   ],
   templateUrl: './article-metadata-form.component.html',
   styleUrl: './article-metadata-form.component.css',
-  providers: [HttpClient],
+  providers: [HttpClient, ArticleService, CategoryService],
 })
-export class ArticleMetadataFormComponent implements OnInit {
+export class ArticleMetadataFormComponent implements OnInit, OnDestroy {
   @Input()
   public article: Article = {} as Article;
+  unsubsrciber$ = new Subject<void>();
 
   constructor(
     private http: HttpClient,
     private toastr: ToastrService,
-    private renderer: Renderer2
+    private router: Router,
+    private categoryService: CategoryService,
+    private articleService: ArticleService
   ) {}
 
   ngOnInit(): void {
@@ -99,6 +103,28 @@ export class ArticleMetadataFormComponent implements OnInit {
       })
     );
   }
+
+  ngOnDestroy(): void {
+    this.unsubsrciber$.next();
+    this.unsubsrciber$.complete();
+  }
+
+  //#region Categories
+
+  public allCategories$!: Observable<any[]>;
+  public selectedCategory: any | undefined;
+
+  loadCategories() {
+    this.allCategories$ = this.categoryService
+      .findAllCategories()
+      .pipe(tap(console.log));
+  }
+
+  saveCategory(event: AutoCompleteSelectEvent) {
+    this.article.categoryId = (event.value as Category)._id;
+  }
+
+  //#endregion !Categories
 
   //#region FileUpload
 
@@ -167,6 +193,7 @@ export class ArticleMetadataFormComponent implements OnInit {
   //#endregion
 
   onSubmit() {
+    // Creating article from form input
     this.article.dateCreated = new Date();
     this.article.moderator = (
       JSON.parse(sessionStorage.getItem('moderator') ?? '') as Moderator
@@ -174,8 +201,30 @@ export class ArticleMetadataFormComponent implements OnInit {
     this.article.contents = '';
     this.article.state = 'DRAFT';
 
-    this.toastr.success(`Created article ${this.article.title}`, 'Success');
+    // Create article API call
 
-    console.log(this.article);
+    this.articleService
+      .createArticle(this.article)
+      .pipe(
+        takeUntil(this.unsubsrciber$),
+        catchError((err) => {
+          console.log(err);
+          this.toastr.error(`Article creation unsucessful!`, 'Error');
+          return EMPTY;
+        })
+      )
+      .subscribe((article: Article) => {
+        if (article) {
+          this.toastr.success(
+            `Created article ${this.article.title}`,
+            'Success'
+          );
+          this.router.navigate([
+            '/moderator-dashboard',
+            'create-article',
+            article._id,
+          ]);
+        }
+      });
   }
 }

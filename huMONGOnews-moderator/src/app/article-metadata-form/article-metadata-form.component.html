@@ -48,6 +48,23 @@
 
   <div class="card flex justify-content-center">
     <p-autoComplete
+      name="category"
+      appendTo="body"
+      [style]="{ width: '100%' }"
+      [inputStyle]="{ width: '100%' }"
+      class="p-autocomplete"
+      [dropdown]="true"
+      field="name"
+      [suggestions]="(allCategories$ | async) ?? []"
+      (onSelect)="saveCategory($event)"
+      (onDropdownClick)="loadCategories()"
+      placeholder="Enter a category"
+      [(ngModel)]="selectedCategory"
+    ></p-autoComplete>
+  </div>
+
+  <div class="card flex justify-content-center">
+    <p-autoComplete
       name="city"
       appendTo="body"
       [style]="{ width: '100%' }"
@@ -56,6 +73,7 @@
       [required]="true"
       (onKeyUp)="getSuggestions($event)"
       [(ngModel)]="selectedItem"
+      [forceSelection]="true"
       field="name"
       [suggestions]="(suggestions$ | async) ?? []"
       (onSelect)="saveLonLat($event)"

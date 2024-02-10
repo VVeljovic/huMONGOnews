@@ -64,7 +64,6 @@ export class SideNavigationComponent implements OnInit {
   }
 
   createNewArticleDraft() {
-    // [routerLink] = "['/moderator-dashboard', 'create-article']";
     this.articleMetadataDialogRef = this.dialog.open(
       ArticleMetadataFormComponent,
       {
@@ -72,6 +71,7 @@ export class SideNavigationComponent implements OnInit {
         draggable: false,
         header: 'Enter article information',
         width: '50%',
+        modal: true,
       }
     );
   }

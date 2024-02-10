@@ -4,6 +4,7 @@ import { Moderator } from './moderator.model';
 export type ArticleState = 'DRAFT' | 'POST' | 'ARCHIVE';
 
 export interface Article {
+  _id: string;
   title: string;
   titleImage: string; // base64 encoded
   contents: string; // HTML format
