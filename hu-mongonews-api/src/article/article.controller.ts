@@ -50,6 +50,14 @@ export class ArticleController {
     return this.articleService.incrementNumberOfViews(id);
   }
 
+  @Put('contents/:id')
+  async updateContents(
+    @Param('id') id: string,
+    @Body() contentsObj: { contents: string },
+  ) {
+    return await this.articleService.updateContents(id, contentsObj.contents);
+  }
+
   @Patch('patchState/:id/:state')
   async patchArticleState(
     @Param('id') id: string,

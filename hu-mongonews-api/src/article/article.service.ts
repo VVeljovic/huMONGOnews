@@ -22,6 +22,7 @@ export class ArticleService {
     await findCategory.save();
     return createdArticleSaved;
   }
+
   async findArticlesWithinRange(
     longitude: number,
     latitude: number,
@@ -54,6 +55,7 @@ export class ArticleService {
       total: totalArticles,
     };
   }
+
   async findAll() {
     return await this.articleModel.find();
   }
@@ -98,6 +100,12 @@ export class ArticleService {
       { _id: id },
       { state, dateStateUpdated: Date.now() },
     );
+  }
+
+  async updateContents(id: string, contents: string) {
+    return await this.articleModel.findByIdAndUpdate(id, {
+      contents: contents,
+    });
   }
 
   remove(id: number) {

@@ -16,4 +16,11 @@ export class ArticleService {
       article
     );
   }
+
+  updateContents(id: string, contents: string): Observable<Article> {
+    return this.httpClient.put<Article>(
+      `${environment.apiUrl}/article/contents/${id}`,
+      { contents }
+    );
+  }
 }
