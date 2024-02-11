@@ -17,7 +17,7 @@ export class CommentsComponent {
   comments:any;
   clicked:boolean[] = [];
   constructor(private commentService:CommentService){
-    this.commentService.getCommentsForPost('65bf77100d164175c563b1ac').subscribe((respo:any)=>{console.log(respo)
+    this.commentService.getCommentsForPost('65c90194e798da52adb66e3a').subscribe((respo:any)=>{console.log(respo)
     
     this.comments=respo.comments;
   
@@ -31,7 +31,7 @@ export class CommentsComponent {
       content:text,
       dateCreated:Date.now(),
       userEmail:this.email,
-      articleId:'65bf77100d164175c563b1ac'
+      articleId:'65c90194e798da52adb66e3a'
     }
     this.commentService.sendComment(comment).subscribe((respo)=>{this.comments.push(respo)
     this.email = "";
@@ -59,7 +59,7 @@ export class CommentsComponent {
       content:text,
       dateCreated:Date.now(),
       userEmail:this.email,
-      articleId:'65bf77100d164175c563b1ac',
+      articleId:'65c90194e798da52adb66e3a',
       commentId:this.comments[i]._id
     }
     this.commentService.sendSubComm(comment).subscribe((respo)=>{console.log(this.comments[i].comments.push(respo))

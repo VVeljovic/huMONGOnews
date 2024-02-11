@@ -17,9 +17,11 @@ constructor(private articleService:ArticleService){
   this.articleService.getFrontPosts().subscribe((respo)=>{
     
     this.articles = respo;
+    console.log(this.articles);
     
   });
   this.articleService.getTopViews().subscribe((respo)=>{
+    console.log(this.articles);
     this.topViews=respo;
 
   })

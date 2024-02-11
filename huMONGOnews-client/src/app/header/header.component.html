@@ -1,11 +1,11 @@
 <header class="page-header js-page-header wrapper">
     <div class="grid">
       <div class="logo">
-        <a href="#"><span>The</span> <span>Hotspot</span> <span>Herald</span></a>
+        <a style="cursor: pointer;" (click)="navigateTo('front-page')"><span>The</span> <span>huMONGOnews</span></a>
       </div>
       <nav class="primary-navigation" aria-label="Primary Navigation">
         <ul class="nav-list">
-          <li style="cursor: pointer;"><a href="#">Articles</a></li>
+          
           <li style="cursor: pointer;" (click)="navigateTo('near')">Nearest to you</li>
           <li style="cursor: pointer;"class="more"><a (click)="toggleMoreOptions()">Categories</a>
             <ul class="more-options" *ngIf="showMoreOptions">

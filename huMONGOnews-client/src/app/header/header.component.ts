@@ -16,14 +16,16 @@ export class HeaderComponent {
   constructor(private router:Router, private categoryService:CategoryService){
     this.categoryService.getCategoriesNames().subscribe((respo)=>{
       this.listOfCategories= respo;
-     
+      console.log(this.listOfCategories)
     });
   }
   toggleMoreOptions() {
     this.showMoreOptions = !this.showMoreOptions;
   }
   navigateTo(path:string){
-    
+    if(path == 'front-page')
+   { this.router.navigate([`/${path}`]); return;}
+
     this.router.navigate([`category/${path}`]);
   }
 }

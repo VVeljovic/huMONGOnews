@@ -7,7 +7,7 @@ import { CommentsComponent } from './comments/comments.component';
 
 export const routes: Routes = [
   { path: 'front-page', pathMatch: 'full', component: FrontPageComponent },
-  { path: 'header', pathMatch: 'full', component: PaginationComponent },
+  { path: '', pathMatch: 'full', component: FrontPageComponent },
   { path: 'comments', pathMatch: 'full', component: CommentsComponent },
   { path: 'category/:categoryName', pathMatch: 'full', component: CategoryPostsComponent },
 ];

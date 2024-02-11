@@ -77,7 +77,7 @@ export class ArticleService {
   }
 
   async getLastNArticles(n: number): Promise<Article[]> {
-    return this.articleModel.find().sort({ dateCreated: -1 }).limit(n).exec();
+    return this.articleModel.find({state:'POST'}).sort({ dateCreated: -1 }).limit(n).exec();
   }
 
   async incrementNumberOfViews(id: string) {
@@ -88,7 +88,7 @@ export class ArticleService {
 
   async getNWithMostNumberOfViews(n: number) {
     const articles = await this.articleModel
-      .find()
+      .find({state:'POST'})
       .sort({ numberOfViews: -1 })
       .limit(n)
       .exec();
