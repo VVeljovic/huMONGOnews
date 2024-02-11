@@ -1,7 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { Article, ArticleState } from './article.schema';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, ObjectId } from 'mongoose';
 import { Category } from 'src/category/category.schema';
 
 @Injectable()
@@ -125,14 +125,33 @@ export class ArticleService {
       .sort('-dateStateUpdated');
   }
 
-  async searchArticlesByContent(searchString: string) {
-    return await this.articleModel.find({
-      $text: {
-        $search: searchString,
-        $caseSensitive: false,
-        $diacriticSensitive: false,
+  // {
+  //   $match: { moderator: moderatorId },
+  // },
+  // {
+  //   $match: {
+  //     score: { $meta: 'textScore' },
+  //   },
+  // },
+  // {
+  //   $sort: { score: { $meta: 'textScore' } },
+  // },
+
+  async searchArticlesByContent(moderatorId: string, searchString: string) {
+    return await this.articleModel.aggregate([
+      {
+        $match: {
+          $text: {
+            $search: searchString,
+            $caseSensitive: false,
+            $diacriticSensitive: false,
+          },
+        },
       },
-    });
+      {
+        $match: { moderator: moderatorId },
+      },
+    ]);
   }
 
   remove(id: number) {
