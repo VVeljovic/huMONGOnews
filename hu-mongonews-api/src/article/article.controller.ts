@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Put,
+  Query,
 } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { Article, ArticleState } from './article.schema';
@@ -104,16 +105,23 @@ export class ArticleController {
     );
   }
 
-  @Get('searchByContent/:moderatorId/:searchString')
+  @Get('searchByContent/moderator/:moderatorId/state/:state')
   async searchByContent(
     @Param('moderatorId') moderatorId: string,
-    @Param('searchString') searchString: string,
+    @Param('state') state: ArticleState,
+    @Query('search')
+    search: string,
   ) {
+    console.log(moderatorId);
+    console.log(state);
+    console.log(search);
     return await this.articleService.searchArticlesByContent(
       moderatorId,
-      searchString,
+      state,
+      search ?? '',
     );
   }
+
   @Put('incrementViews/:id')
   async incrementViews(@Param('id') id: string) {
     return await this.articleService.incrementNumberOfViews(id);

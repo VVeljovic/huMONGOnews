@@ -1,3 +1,12 @@
+<div class="search-div top-navigation__search">
+  <i-feather name="search" style="color: ccc"></i-feather>
+  <i class="top-navigation__search-icon fas fa-search"></i>
+  <input
+    (keyup)="onSearch(getValue($event))"
+    class="top-navigation__search-input"
+    placeholder="Search..."
+  />
+</div>
 <h1>{{ articleType$ | async | titlecase }}</h1>
 <div class="scrollable">
   <div class="card-container">

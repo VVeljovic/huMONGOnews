@@ -125,57 +125,105 @@ export class ArticleService {
       .sort('-dateStateUpdated');
   }
 
-  async searchArticlesByContent(moderatorId: string, searchString: string) {
-    return await this.articleModel.aggregate([
-      {
-        $match: {
-          $text: {
-            $search: searchString,
-            $caseSensitive: false,
-            $diacriticSensitive: false,
+  async searchArticlesByContent(
+    moderatorId: string,
+    articleState: ArticleState,
+    searchString: string,
+  ) {
+    if (searchString) {
+      return await this.articleModel.aggregate([
+        {
+          $match: {
+            $text: {
+              $search: searchString,
+              $caseSensitive: false,
+              $diacriticSensitive: false,
+            },
           },
         },
-      },
-      {
-        $lookup: {
-          from: 'moderators',
-          localField: 'moderator',
-          foreignField: '_id',
-          as: 'moderator',
-        },
-      },
-      {
-        $match: {
-          'moderator._id': new mongoose.Types.ObjectId(moderatorId),
-        },
-      },
-      {
-        $project: {
-          title: 1,
-          titleImage: 1,
-          contents: 1,
-          dateCreated: 1,
-          dateStateUpdated: 1,
-          description: 1,
-          state: 1,
-          location: 1,
-          moderator: 1,
-          comments: 1,
-          numberOfViews: 1,
-          categoryId: 1,
-          score: {
-            $meta: 'textScore',
+        {
+          $lookup: {
+            from: 'moderators',
+            localField: 'moderator',
+            foreignField: '_id',
+            as: 'moderator',
           },
         },
-      },
-      {
-        $sort: {
-          score: {
-            $meta: 'textScore',
+        {
+          $match: {
+            'moderator._id': new mongoose.Types.ObjectId(moderatorId),
           },
         },
-      },
-    ]);
+        {
+          $match: {
+            state: articleState,
+          },
+        },
+        {
+          $project: {
+            title: 1,
+            titleImage: 1,
+            contents: 1,
+            dateCreated: 1,
+            dateStateUpdated: 1,
+            description: 1,
+            state: 1,
+            location: 1,
+            moderator: 1,
+            comments: 1,
+            numberOfViews: 1,
+            categoryId: 1,
+            score: {
+              $meta: 'textScore',
+            },
+          },
+        },
+        {
+          $sort: {
+            score: {
+              $meta: 'textScore',
+            },
+          },
+        },
+      ]);
+    } else {
+      return await this.articleModel.aggregate([
+        {
+          $lookup: {
+            from: 'moderators',
+            localField: 'moderator',
+            foreignField: '_id',
+            as: 'moderator',
+          },
+        },
+        {
+          $match: {
+            'moderator._id': new mongoose.Types.ObjectId(moderatorId),
+          },
+        },
+        {
+          $match: {
+            state: articleState,
+          },
+        },
+        {
+          $project: {
+            title: 1,
+            titleImage: 1,
+            contents: 1,
+            dateCreated: 1,
+            dateStateUpdated: 1,
+            description: 1,
+            state: 1,
+            location: 1,
+            moderator: 1,
+            comments: 1,
+            numberOfViews: 1,
+            categoryId: 1,
+          },
+        },
+      ]);
+    }
   }
 
   remove(id: number) {

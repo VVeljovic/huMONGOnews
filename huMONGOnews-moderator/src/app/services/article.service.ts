@@ -1,7 +1,14 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Article, ArticleState } from '../models/article.model';
-import { Observable } from 'rxjs';
+import {
+  Observable,
+  Subject,
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+  tap,
+} from 'rxjs';
 import { environment } from '../../environments/environment.development';
 
 @Injectable({
@@ -10,7 +17,16 @@ import { environment } from '../../environments/environment.development';
 export class ArticleService {
   public currentEditingDocumentContents: string | null = null;
 
+  public searchString$ = new Subject<string>();
+
+  public searchStringEmitter = new EventEmitter<string>();
+
   constructor(private httpClient: HttpClient) {}
+
+  onSearchChange(searchString: string) {
+    this.searchStringEmitter.emit(searchString);
+    this.searchString$.next(searchString);
+  }
 
   createArticle(article: Article): Observable<Article> {
     return this.httpClient.post<Article>(
@@ -21,6 +37,16 @@ export class ArticleService {
 
   findById(id: string) {
     return this.httpClient.get<Article>(`${environment.apiUrl}/article/${id}`);
+  }
+
+  searchByContent(
+    moderatorId: string,
+    articleState: ArticleState,
+    search: string
+  ): Observable<Article[]> {
+    return this.httpClient.get<Article[]>(
+      `${environment.apiUrl}/article/searchByContent/moderator/${moderatorId}/state/${articleState}/?search=${search}`
+    );
   }
 
   patchState(id: string, state: ArticleState) {

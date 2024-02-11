@@ -1,4 +1,16 @@
-import { Observable, Subject, map, of, switchMap, takeUntil } from 'rxjs';
+import {
+  Observable,
+  Subject,
+  combineLatest,
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  merge,
+  of,
+  switchMap,
+  takeUntil,
+  tap,
+} from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import {
@@ -17,6 +29,8 @@ import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastrService } from 'ngx-toastr';
 import { DialogModule } from 'primeng/dialog';
+import { TopNavigationComponent } from '../moderator-dashboard/top-navigation/top-navigation.component';
+import { FeatherModule } from 'angular-feather';
 
 @Component({
   selector: 'app-articles-container',
@@ -32,6 +46,8 @@ import { DialogModule } from 'primeng/dialog';
     ConfirmDialogModule,
     ButtonModule,
     DialogModule,
+    TopNavigationComponent,
+    FeatherModule,
   ],
   templateUrl: './articles-container.component.html',
   styleUrl: './articles-container.component.css',
@@ -42,6 +58,7 @@ export class ArticlesContainerComponent implements OnInit, OnDestroy {
   public articles$: Observable<Article[]> = of([]);
   public moderator!: Moderator;
   private unsubscriber$ = new Subject<void>();
+  private searchStringLocal$: Observable<string> = of('');
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -51,7 +68,19 @@ export class ArticlesContainerComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
+  onSearch(searchString: string) {
+    this.articleService.onSearchChange(searchString);
+  }
+
+  getValue(event: Event): string {
+    return (event.target as HTMLInputElement).value;
+  }
+
   ngOnInit(): void {
+    // this.articleService.searchString$
+    //   .pipe(debounceTime(500), distinctUntilChanged())
+    //   .subscribe(console.log);
+
     this.moderator = JSON.parse(sessionStorage.getItem('moderator') ?? '');
 
     if (!this.moderator._id) throw Error('No moderator found!');
@@ -59,19 +88,31 @@ export class ArticlesContainerComponent implements OnInit, OnDestroy {
     this.articleType$ = this.activatedRoute.paramMap.pipe(
       map((params) => {
         return params.get('type') ?? '';
-      })
+      }),
+      map((articleType) => articleType.toUpperCase().slice(0, -1))
     );
 
-    this.articles$ = this.articleType$.pipe(
-      map(
-        (articleType) => articleType.toUpperCase().slice(0, -1) as ArticleState
+    this.articles$ = combineLatest([
+      this.articleService.searchString$.pipe(
+        debounceTime(500),
+        distinctUntilChanged()
       ),
-      switchMap((articleState) =>
-        this.articleService.findArticlesInStateForModerator(
+      this.articleType$,
+    ]).pipe(
+      switchMap((value: [string, string]) => {
+        const searchString = value[0];
+        const articleType = value[1];
+
+        console.log(searchString);
+        console.log(articleType);
+
+        return this.articleService.searchByContent(
           this.moderator._id ?? '',
-          articleState
-        )
-      )
+          articleType as ArticleState,
+          searchString
+        );
+      }),
+      tap(console.log)
     );
   }
 

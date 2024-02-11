@@ -1,4 +1,5 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FeatherModule } from 'angular-feather';
@@ -6,30 +7,37 @@ import {
   Observable,
   Subject,
   debounceTime,
+  distinct,
   distinctUntilChanged,
   tap,
 } from 'rxjs';
+import { ArticleService } from '../../services/article.service';
 
 @Component({
   selector: 'app-top-navigation',
   standalone: true,
-  imports: [CommonModule, FeatherModule, FormsModule, AsyncPipe],
+  imports: [
+    CommonModule,
+    FeatherModule,
+    FormsModule,
+    AsyncPipe,
+    HttpClientModule,
+  ],
   templateUrl: './top-navigation.component.html',
   styleUrl: './top-navigation.component.css',
+  providers: [ArticleService],
 })
 export class TopNavigationComponent implements OnInit {
-  public searchString$ = new Subject<string>();
-
-  constructor() {}
+  constructor(private articleService: ArticleService) {}
 
   ngOnInit(): void {
-    this.searchString$
-      .pipe(debounceTime(500), distinctUntilChanged())
-      .subscribe(console.log);
+    // this.articleService.searchString$
+    //   .pipe(debounceTime(500), distinctUntilChanged())
+    //   .subscribe(console.log);
   }
 
   onSearch(searchString: string) {
-    this.searchString$.next(searchString);
+    this.articleService.onSearchChange(searchString);
   }
 
   getValue(event: Event): string {
