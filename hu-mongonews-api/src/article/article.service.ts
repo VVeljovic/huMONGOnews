@@ -87,6 +87,7 @@ export class ArticleService {
   async incrementNumberOfViews(id: string) {
     const article = await this.articleModel.findById(id);
     article.numberOfViews++;
+    console.log('a');
     return article.save();
   }
 

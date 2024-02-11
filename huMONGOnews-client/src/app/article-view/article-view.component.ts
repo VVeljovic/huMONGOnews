@@ -36,9 +36,12 @@ export class ArticleViewComponent implements OnInit {
       map((params) => {
         return params.get('id') ?? '';
       }),
+      tap((articleId)=>{
+        this.articleService.incrementViews(articleId).subscribe();
+      }),
       switchMap((articleId) => {
         return this.articleService.findById(articleId);
-      })
+      }),
     );
   }
 }

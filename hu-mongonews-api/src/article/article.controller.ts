@@ -108,4 +108,9 @@ export class ArticleController {
   async searchByContent(@Param('searchString') searchString: string) {
     return await this.articleService.searchArticlesByContent(searchString);
   }
+  @Put('incrementViews/:id')
+  async incrementViews(@Param('id')id:string)
+  {
+    return await this.articleService.incrementNumberOfViews(id);
+  }
 }

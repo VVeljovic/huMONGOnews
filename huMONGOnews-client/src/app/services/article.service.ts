@@ -32,4 +32,8 @@ export class ArticleService {
   getMyLocation() {
     return this.httpClient.get('https://ipapi.co/json/');
   }
+  incrementViews(id:string)
+  {
+    return this.httpClient.put(`${environment.api}article/${id}`,{});
+  }
 }
