@@ -7,180 +7,261 @@
 - Tricks here: https://css-tricks.com/newsletter/276-future-friendly-layouts-and-design-system-vitals/
 -->
 <app-header></app-header>
-  <main class="page-content js-page-content" *ngIf="articles && articles.length > 0">
-    <section class="articles wrapper">
-      <div class="grid">
-  
-        <article class="article card-img-top priority-1">
-          <a href="#">
-            <figure class="cover-img">
-              <picture>
-               
-                <img [alt]="'data:image/png;charset=utf-8;base64,' + articles[0].titleImage"
-                [src]="'data:image/jpeg;charset=utf-8;base64,' + articles[0].titleImage">
-                <!-- img src="https://source.unsplash.com/WLUHO9A_xik/1090x1090" alt="Quis aute iure reprehenderit in voluptate velit esse" / -->
-              </picture>
-            </figure>
-            <div class="description">
-              <h2 class="headline"><span class="trumpet">{{articles[0].title}}</span> </h2>
-           
-            </div>
-          </a>
-        </article>
-  
-        <article class="article card-img-top priority-2" *ngIf="articles[1]">
-          <a href="#">
-            <figure class="cover-img">
-              <picture>
-               
-                <img [alt]="'data:image/png;charset=utf-8;base64,' + articles[1].titleImage"
-                [src]="'data:image/jpeg;charset=utf-8;base64,' + articles[1].titleImage">
-                <!-- img src="https://source.unsplash.com/WLUHO9A_xik/1090x1090" alt="Quis aute iure reprehenderit in voluptate velit esse" / -->
-              </picture>
-            </figure>
-            <div class="description" *ngIf="articles[1]">
-              <h2 class="headline"><span class="trumpet">{{articles[1]?.title}}</span> </h2>
-             
-            </div>
-          </a>
-        </article>
-  
-        <article class="article card-img-top priority-2" *ngIf="articles[2]">
-          <a href="#">
-            <figure class="cover-img">
-              <picture>
-                <img [alt]="'data:image/png;charset=utf-8;base64,' + articles[2].titleImage"
-                [src]="'data:image/jpeg;charset=utf-8;base64,' + articles[2].titleImage">
-                <!-- img src="https://source.unsplash.com/WLUHO9A_xik/1090x1090" alt="Quis aute iure reprehenderit in voluptate velit esse" / -->
-              </picture>
-            </figure>
-            <div class="description">
-              <h2 class="headline">{{articles[2]?.title}}</h2>
-             
-            </div>
-          </a>
-        </article>
-  
-        <article class="article card-img-top priority-3" *ngIf="articles[3]">
-          <a href="#">
-            <figure class="cover-img">
-              <picture>
-                <img [alt]="'data:image/png;charset=utf-8;base64,' + articles[3].titleImage"
-                [src]="'data:image/jpeg;charset=utf-8;base64,' + articles[3].titleImage">
-                <!-- img src="https://source.unsplash.com/WLUHO9A_xik/1090x1090" alt="Quis aute iure reprehenderit in voluptate velit esse" / -->
-              </picture>
-            </figure>
-            <div class="description">
-              <h2 class="headline"><span class="trumpet">{{articles[3]?.title}}</span> </h2>
-              
-            </div>
-          </a>
-        </article>
-  
-        <article class="article card-img-top priority-3" *ngIf="articles[4]">
-          <a href="#">
-            <figure class="cover-img">
-              <picture>
-                <img [alt]="'data:image/png;charset=utf-8;base64,' + articles[4].titleImage"
-                [src]="'data:image/jpeg;charset=utf-8;base64,' + articles[4].titleImage">
-              </picture>
-            </figure>
-            <div class="description">
-              <h2 class="headline">{{articles[4]?.title}}</h2>
-            
-            </div>
-          </a>
-        </article>
-  
-        <article class="article card-img-top priority-3" *ngIf="articles[5]">
-          <a href="#">
-            <figure class="cover-img">
-              <picture>
-                <img [alt]="'data:image/png;charset=utf-8;base64,' + articles[5].titleImage"
-                [src]="'data:image/jpeg;charset=utf-8;base64,' + articles[5].titleImage">
-              </picture>
-            </figure>
-            <div class="description">
-              <h2 class="headline">{{articles[5]?.title}}.</h2>
-              
-            </div>
-          </a>
-        </article>
-  
-        <article class="article card-img-top priority-3" *ngIf="articles[6]">
-          <a href="#">
-            <figure class="cover-img">
-              <picture>
-                <img [alt]="'data:image/png;charset=utf-8;base64,' + articles[6].titleImage"
-                [src]="'data:image/jpeg;charset=utf-8;base64,' + articles[6].titleImage">
-              </picture>
-            </figure>
-            <div class="description">
-              <h2 class="headline">{{articles[6]?.title}}</h2>
-             
-            </div>
-          </a>
-        </article>
-  
-      </div>
-    </section>
-    <section class="video wrapper">
-      <div class="grid">
-  
-        <h5 class="section-header">Top views</h5>
-        
-  
-      </div>
-    </section>
-    <section class="articles wrapper" *ngIf="topViews && topViews.length > 0">
-      <div class="grid">
-  
-        <article class="article card-img-top priority-1">
-          <a href="#">
-            <figure class="cover-img">
-              <picture>
-                <img [alt]="'data:image/png;charset=utf-8;base64,' + topViews[0].titleImage"
-                [src]="'data:image/jpeg;charset=utf-8;base64,' + topViews[0].titleImage">
-              </picture>
-            </figure>
-            <div class="description">
-              <h2 class="headline"><span class="trumpet">{{topViews[0].title}}</span> </h2>
-             
-            </div>
-          </a>
-        </article>
-  
-        <article class="article card-img-top priority-2" *ngIf="topViews[1]">
-          <a href="#">
-            <figure class="cover-img">
-              <picture>
-                <img [alt]="'data:image/png;charset=utf-8;base64,' + topViews[1].titleImage"
-                [src]="'data:image/jpeg;charset=utf-8;base64,' + topViews[1].titleImage">
-              </picture>
-            </figure>
-            <div class="description">
-              <h2 class="headline"><span class="trumpet">{{topViews[1].title}}</span> </h2>
-              
-            </div>
-          </a>
-        </article>
-  
-        <article class="article card-img-top priority-2"*ngIf="topViews[2]">
-          <a href="#">
-            <figure class="cover-img">
-              <picture>
-                <img [alt]="'data:image/png;charset=utf-8;base64,' + topViews[2].titleImage"
-                [src]="'data:image/jpeg;charset=utf-8;base64,' + topViews[2].titleImage">
-              </picture>
-            </figure>
-            <div class="description">
-              <h2 class="headline">{{topViews[2].title}}</h2>
-             
-            </div>
-          </a>
-        </article>
-  
-      </div>
-    </section>
-  </main>
- 
+<main
+  class="page-content js-page-content"
+  *ngIf="articles && articles.length > 0"
+>
+  <section class="articles wrapper">
+    <div class="grid">
+      <article
+        [routerLink]="['/article-view', articles[0]._id]"
+        routerLinkActive="router-link-active"
+        class="article card-img-top priority-1"
+      >
+        <figure class="cover-img">
+          <picture>
+            <img
+              [alt]="
+                'data:image/png;charset=utf-8;base64,' + articles[0].titleImage
+              "
+              [src]="
+                'data:image/jpeg;charset=utf-8;base64,' + articles[0].titleImage
+              "
+            />
+            <!-- img src="https://source.unsplash.com/WLUHO9A_xik/1090x1090" alt="Quis aute iure reprehenderit in voluptate velit esse" / -->
+          </picture>
+        </figure>
+        <div class="description">
+          <h2 class="headline">
+            <span class="trumpet">{{ articles[0].title }}</span>
+          </h2>
+        </div>
+      </article>
+
+      <article
+        [routerLink]="['/article-view', articles[1]._id]"
+        routerLinkActive="router-link-active"
+        class="article card-img-top priority-2"
+        *ngIf="articles[1]"
+      >
+        <figure class="cover-img">
+          <picture>
+            <img
+              [alt]="
+                'data:image/png;charset=utf-8;base64,' + articles[1].titleImage
+              "
+              [src]="
+                'data:image/jpeg;charset=utf-8;base64,' + articles[1].titleImage
+              "
+            />
+            <!-- img src="https://source.unsplash.com/WLUHO9A_xik/1090x1090" alt="Quis aute iure reprehenderit in voluptate velit esse" / -->
+          </picture>
+        </figure>
+        <div class="description" *ngIf="articles[1]">
+          <h2 class="headline">
+            <span class="trumpet">{{ articles[1]?.title }}</span>
+          </h2>
+        </div>
+      </article>
+
+      <article
+        [routerLink]="['/article-view', articles[2]._id]"
+        routerLinkActive="router-link-active"
+        class="article card-img-top priority-2"
+        *ngIf="articles[2]"
+      >
+        <figure class="cover-img">
+          <picture>
+            <img
+              [alt]="
+                'data:image/png;charset=utf-8;base64,' + articles[2].titleImage
+              "
+              [src]="
+                'data:image/jpeg;charset=utf-8;base64,' + articles[2].titleImage
+              "
+            />
+            <!-- img src="https://source.unsplash.com/WLUHO9A_xik/1090x1090" alt="Quis aute iure reprehenderit in voluptate velit esse" / -->
+          </picture>
+        </figure>
+        <div class="description">
+          <h2 class="headline">{{ articles[2]?.title }}</h2>
+        </div>
+      </article>
+
+      <article
+        [routerLink]="['/article-view', articles[3]._id]"
+        routerLinkActive="router-link-active"
+        class="article card-img-top priority-3"
+        *ngIf="articles[3]"
+      >
+        <figure class="cover-img">
+          <picture>
+            <img
+              [alt]="
+                'data:image/png;charset=utf-8;base64,' + articles[3].titleImage
+              "
+              [src]="
+                'data:image/jpeg;charset=utf-8;base64,' + articles[3].titleImage
+              "
+            />
+            <!-- img src="https://source.unsplash.com/WLUHO9A_xik/1090x1090" alt="Quis aute iure reprehenderit in voluptate velit esse" / -->
+          </picture>
+        </figure>
+        <div class="description">
+          <h2 class="headline">
+            <span class="trumpet">{{ articles[3]?.title }}</span>
+          </h2>
+        </div>
+      </article>
+
+      <article
+        [routerLink]="['/article-view', articles[4]._id]"
+        routerLinkActive="router-link-active"
+        class="article card-img-top priority-3"
+        *ngIf="articles[4]"
+      >
+        <figure class="cover-img">
+          <picture>
+            <img
+              [alt]="
+                'data:image/png;charset=utf-8;base64,' + articles[4].titleImage
+              "
+              [src]="
+                'data:image/jpeg;charset=utf-8;base64,' + articles[4].titleImage
+              "
+            />
+          </picture>
+        </figure>
+        <div class="description">
+          <h2 class="headline">{{ articles[4]?.title }}</h2>
+        </div>
+      </article>
+
+      <article
+        [routerLink]="['/article-view', articles[5]._id]"
+        routerLinkActive="router-link-active"
+        class="article card-img-top priority-3"
+        *ngIf="articles[5]"
+      >
+        <figure class="cover-img">
+          <picture>
+            <img
+              [alt]="
+                'data:image/png;charset=utf-8;base64,' + articles[5].titleImage
+              "
+              [src]="
+                'data:image/jpeg;charset=utf-8;base64,' + articles[5].titleImage
+              "
+            />
+          </picture>
+        </figure>
+        <div class="description">
+          <h2 class="headline">{{ articles[5]?.title }}.</h2>
+        </div>
+      </article>
+
+      <article
+        [routerLink]="['/article-view', articles[6]._id]"
+        routerLinkActive="router-link-active"
+        class="article card-img-top priority-3"
+        *ngIf="articles[6]"
+      >
+        <figure class="cover-img">
+          <picture>
+            <img
+              [alt]="
+                'data:image/png;charset=utf-8;base64,' + articles[6].titleImage
+              "
+              [src]="
+                'data:image/jpeg;charset=utf-8;base64,' + articles[6].titleImage
+              "
+            />
+          </picture>
+        </figure>
+        <div class="description">
+          <h2 class="headline">{{ articles[6]?.title }}</h2>
+        </div>
+      </article>
+    </div>
+  </section>
+  <section class="video wrapper">
+    <div class="grid">
+      <h5 class="section-header">Top views</h5>
+    </div>
+  </section>
+  <section class="articles wrapper" *ngIf="topViews && topViews.length > 0">
+    <div class="grid">
+      <article
+        [routerLink]="['/article-view', topViews[0]._id]"
+        routerLinkActive="router-link-active"
+        class="article card-img-top priority-1"
+      >
+        <figure class="cover-img">
+          <picture>
+            <img
+              [alt]="
+                'data:image/png;charset=utf-8;base64,' + topViews[0].titleImage
+              "
+              [src]="
+                'data:image/jpeg;charset=utf-8;base64,' + topViews[0].titleImage
+              "
+            />
+          </picture>
+        </figure>
+        <div class="description">
+          <h2 class="headline">
+            <span class="trumpet">{{ topViews[0].title }}</span>
+          </h2>
+        </div>
+      </article>
+
+      <article
+        [routerLink]="['/article-view', topViews[1]._id]"
+        routerLinkActive="router-link-active"
+        class="article card-img-top priority-2"
+        *ngIf="topViews[1]"
+      >
+        <figure class="cover-img">
+          <picture>
+            <img
+              [alt]="
+                'data:image/png;charset=utf-8;base64,' + topViews[1].titleImage
+              "
+              [src]="
+                'data:image/jpeg;charset=utf-8;base64,' + topViews[1].titleImage
+              "
+            />
+          </picture>
+        </figure>
+        <div class="description">
+          <h2 class="headline">
+            <span class="trumpet">{{ topViews[1].title }}</span>
+          </h2>
+        </div>
+      </article>
+
+      <article
+        [routerLink]="['/article-view', topViews[0]._id]"
+        routerLinkActive="router-link-active"
+        class="article card-img-top priority-2"
+        *ngIf="topViews[2]"
+      >
+        <figure class="cover-img">
+          <picture>
+            <img
+              [alt]="
+                'data:image/png;charset=utf-8;base64,' + topViews[2].titleImage
+              "
+              [src]="
+                'data:image/jpeg;charset=utf-8;base64,' + topViews[2].titleImage
+              "
+            />
+          </picture>
+        </figure>
+        <div class="description">
+          <h2 class="headline">{{ topViews[2].title }}</h2>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>

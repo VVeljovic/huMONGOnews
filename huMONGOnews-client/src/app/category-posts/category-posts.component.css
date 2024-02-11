@@ -20,6 +20,12 @@ i{
 .container {
   width: 96%;
   margin: 1rem auto;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.container:hover {
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2); /* Adjust shadow as desired */
 }
 
 .card {

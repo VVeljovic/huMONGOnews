@@ -1,116 +1,140 @@
 <div class="block">
-	<div class="block-header">
-		<div class="title">
-			<h2>Comments</h2>
-			
-		</div>
-		<div class="group-radio">
-			<span class="button-radio">
-				<input id="latest" name="latest" type="radio" checked>
-				<label for="latest">Latest</label>
-			</span>
-			<div class="divider"></div>
-			<span class="button-radio">
-				<input id="popular" name="latest" type="radio">
-				<label for="popular">Popular</label>
-			</span>
-		</div>
-	</div>
-	<div class="writing">
-		<div contenteditable="true" class="textarea" autofocus spellcheck="false" #textarea>
-			
-		</div>
-		<div class="footer">
-			<div class="text-format">
-				<button class="btn"><i class="ri-bold"></i></button>
-				<button class="btn"><i class="ri-italic"></i></button>
-				<button class="btn"><i class="ri-underline"></i></button>
-				<button class="btn"><i class="ri-list-unordered"></i></button>
-			</div>
-			<div class="group-button">
-				<button class="btn"><i class="ri-at-line"></i></button>
-				<button class="btn primary"(click)="sendComment()">Send</button>
-			</div>
-		</div>
-		
-	</div>
-	<input style=" padding: 10px;
-		margin-bottom: 12px;
-		border: 1px solid #ddd;
-		border-radius: 4px;
-		transition: border-color 0.3s ease-in-out;
-		outline: none;
-		color: #333;" type="text" id="email" name="email" placeholder="Email" required [(ngModel)]="email">
-	<div *ngFor="let comment of comments; let i =index">
-		<div class="comment">
-			<div class="user-banner">
-				<div class="user">
-					<div class="avatar" style="background-color:#fff5e9;border-color:#ffe0bd; color:#F98600">
-						
-						
-					</div>
-					<h5>{{comment.userEmail}}</h5>
-				</div>
-				<button class="btn dropdown"><i class="ri-more-line"></i></button>
-			</div>
-			<div class="content">
-				<p>{{comment.content}}</p>
-			</div>
-			<div class="footer">
-				<button class="btn"><i class="ri-emotion-line"></i></button>
-				<div class="divider"></div>
-				<a style="cursor: pointer;"(click)="commentForm(i)">Reply</a>
-				<div class="divider"></div>
-				<span class="is-mute">{{comment.dateCreated |  date:'dd/MM/yyyy '}}</span>
-			</div>
-		</div>
-		<div class="writing" *ngIf="clicked[i]" >
-			<div contenteditable="true" class="textarea" autofocus spellcheck="false" #textarea2>
-				
-			</div>
-			<div class="footer">
-				<div class="text-format">
-					<button class="btn"><i class="ri-bold"></i></button>
-					<button class="btn"><i class="ri-italic"></i></button>
-					<button class="btn"><i class="ri-underline"></i></button>
-					<button class="btn"><i class="ri-list-unordered"></i></button>
-				</div>
-				<div class="group-button">
-					<button class="btn"><i class="ri-at-line"></i></button>
-					<button class="btn primary"(click)="sendSubComm(i)">Send</button>
-				</div>
-			</div>
-		</div>
-		<input style=" padding: 10px;
-		margin-bottom: 12px;
-		border: 1px solid #ddd;
-		border-radius: 4px;
-		transition: border-color 0.3s ease-in-out;
-		outline: none;
-		color: #333;" type="text" id="email" name="email" placeholder="Email" required [(ngModel)]="email" *ngIf="clicked[i]">
-		<div class="reply comment" *ngFor="let subComm of comment.comments">
-			<div class="user-banner">
-				<div class="user">
-					<div class="avatar">
-						<div class="avatar" style="background-color:aqua;border-color:aqua; color:#F98600"></div>
-						
-					</div>
-                    
-					<h5>{{subComm.userEmail}}</h5>
-				</div>
-				<button class="btn dropdown"><i class="ri-more-line"></i></button>
-			</div>
-			<div class="content">
-				<p>{{subComm.content}}</p>
-			</div>
-			<div class="footer">
-				
-				<div class="divider"></div>
-				
-				<div class="divider"></div>
-				<span class="is-mute">{{subComm.dateCreated |  date:'dd/MM/yyyy '}}</span>
-			</div>
-		</div>
-	</div>
-	
+  <div class="block-header">
+    <div class="title">
+      <h2>Comments</h2>
+    </div>
+  </div>
+  <div class="writing">
+    <div
+      contenteditable="true"
+      class="textarea"
+      autofocus
+      spellcheck="false"
+      #textarea
+    ></div>
+    <div class="footer">
+      <div class="text-format">
+        <button class="btn"><i class="ri-bold"></i></button>
+        <button class="btn"><i class="ri-italic"></i></button>
+        <button class="btn"><i class="ri-underline"></i></button>
+        <button class="btn"><i class="ri-list-unordered"></i></button>
+      </div>
+      <div class="group-button">
+        <button class="btn"><i class="ri-at-line"></i></button>
+        <button class="btn primary" (click)="sendComment()">Send</button>
+      </div>
+    </div>
+  </div>
+  <input
+    style="
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      transition: border-color 0.3s ease-in-out;
+      outline: none;
+      color: #333;
+    "
+    type="text"
+    id="email"
+    name="email"
+    placeholder="Email"
+    required
+    [(ngModel)]="email"
+  />
+  <div *ngFor="let comment of comments; let i = index">
+    <div class="comment">
+      <div class="user-banner">
+        <div class="user">
+          <div
+            class="avatar"
+            style="
+              background-color: #fff5e9;
+              border-color: #ffe0bd;
+              color: #f98600;
+            "
+          ></div>
+          <h5>{{ comment.userEmail }}</h5>
+        </div>
+        <button class="btn dropdown"><i class="ri-more-line"></i></button>
+      </div>
+      <div class="content">
+        <p>{{ comment.content }}</p>
+      </div>
+      <div class="footer">
+        <button class="btn"><i class="ri-emotion-line"></i></button>
+        <div class="divider"></div>
+        <a style="cursor: pointer" (click)="commentForm(i)">Reply</a>
+        <div class="divider"></div>
+        <span class="is-mute">{{
+          comment.dateCreated | date : "dd/MM/yyyy "
+        }}</span>
+      </div>
+    </div>
+    <div class="writing" *ngIf="clicked[i]">
+      <div
+        contenteditable="true"
+        class="textarea"
+        autofocus
+        spellcheck="false"
+        #textarea2
+      ></div>
+      <div class="footer">
+        <div class="text-format">
+          <button class="btn"><i class="ri-bold"></i></button>
+          <button class="btn"><i class="ri-italic"></i></button>
+          <button class="btn"><i class="ri-underline"></i></button>
+          <button class="btn"><i class="ri-list-unordered"></i></button>
+        </div>
+        <div class="group-button">
+          <button class="btn"><i class="ri-at-line"></i></button>
+          <button class="btn primary" (click)="sendSubComm(i)">Send</button>
+        </div>
+      </div>
+    </div>
+    <input
+      style="
+        padding: 10px;
+        margin-bottom: 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        transition: border-color 0.3s ease-in-out;
+        outline: none;
+        color: #333;
+      "
+      type="text"
+      id="email"
+      name="email"
+      placeholder="Email"
+      required
+      [(ngModel)]="email"
+      *ngIf="clicked[i]"
+    />
+    <div class="reply comment" *ngFor="let subComm of comment.comments">
+      <div class="user-banner">
+        <div class="user">
+          <div class="avatar">
+            <div
+              class="avatar"
+              style="background-color: aqua; border-color: aqua; color: #f98600"
+            ></div>
+          </div>
+
+          <h5>{{ subComm.userEmail }}</h5>
+        </div>
+        <button class="btn dropdown"><i class="ri-more-line"></i></button>
+      </div>
+      <div class="content">
+        <p>{{ subComm.content }}</p>
+      </div>
+      <div class="footer">
+        <div class="divider"></div>
+
+        <div class="divider"></div>
+        <span class="is-mute">{{
+          subComm.dateCreated | date : "dd/MM/yyyy "
+        }}</span>
+      </div>
+    </div>
+  </div>
 </div>

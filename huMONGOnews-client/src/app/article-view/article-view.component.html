@@ -1,0 +1,5 @@
+<app-header></app-header>
+<div *ngIf="article$ | async as article">
+  <p [innerHTML]="article.contents"></p>
+  <app-comments [articleId]="article._id"></app-comments>
+</div>

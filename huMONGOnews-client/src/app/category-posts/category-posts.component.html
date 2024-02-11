@@ -1,37 +1,36 @@
 <main>
   <app-header></app-header>
-    <div class="container" *ngFor="let article of listOfArticles">
+  <div
+    [routerLink]="['/article-view', article._id]"
+    routerLinkActive="router-link-active"
+    class="container"
+    *ngFor="let article of listOfArticles"
+  >
     <!--card with shadow-->
-      <article class="card shadow">
+    <article class="card shadow">
+      <div>
+        <img
+          [alt]="'data:image/png;charset=utf-8;base64,' + article.titleImage"
+          [src]="'data:image/jpeg;charset=utf-8;base64,' + article.titleImage"
+        />
+      </div>
+
+      <div style="overflow: hidden; text-overflow: ellipsis">
+        <p>
+          <strong>{{ article.title }}</strong>
+        </p>
         <div>
-          <img [alt]="'data:image/png;charset=utf-8;base64,' + article.titleImage"
-          [src]="'data:image/jpeg;charset=utf-8;base64,' + article.titleImage">
-        </div>
-  
-        <div>
-          <p><strong>{{article.title}}</strong></p>
-          <div>
           <span>
             <i class="fab fa-instagram"></i>
-             {{article.description}}<time></time>
-           </span>
-          </div>
-          <span>
-            <i class="fab fa-instagram"></i>
-             <time>{{article.dateCreated |  date:'dd/MM/yyyy '}}</time>
-           </span>
+            {{ article.description }}<time></time>
+          </span>
         </div>
-      </article>
-      
-       
-  
-      
-   
-       
-   
-       
-  
-     
-    </div>
-    <app-pagination style="width: 200px;"></app-pagination>
-  </main>
+        <span>
+          <i class="fab fa-instagram"></i>
+          <time>{{ article.dateCreated | date : "dd/MM/yyyy " }}</time>
+        </span>
+      </div>
+    </article>
+  </div>
+  <app-pagination style="width: 200px"></app-pagination>
+</main>

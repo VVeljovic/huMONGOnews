@@ -6,7 +6,7 @@
     --body-line-height: 1.5;
     --header-line-height: 1.2;
   }
-  
+
   /* CSS Reset: https://elad2412.github.io/the-new-css-reset/ */
   *:where(:not(iframe, canvas, img, svg, video):not(svg *, symbol *)) {
     all: unset;
@@ -36,7 +36,7 @@
     overflow-wrap: break-word;
     -webkit-line-break: after-white-space;
   }
-  
+
   /* Typography */
   body {
     background: whitesmoke;
@@ -96,7 +96,7 @@
   .trumpet {
     color: firebrick;
   }
-  
+
   /* Layout */
   .wrapper {
     padding: 0 1rem;
@@ -107,7 +107,7 @@
     margin: 0 auto;
     max-width: 1090px;
   }
-  
+
   /* Page Header */
   .page-header {
     background: white;
@@ -150,7 +150,7 @@
       color: white;
     }
   }
-  
+
   .header--fixed {
     position: absolute;
     top: 0;
@@ -219,13 +219,14 @@
       width: 0.5rem;
     }
   }
-  
+
   .grid.search {
     display: none;
   }
-  
+
   /* Section Articles */
   .articles {
+    cursor: pointer;
     padding: 2rem 1rem;
     .grid {
       grid-template-columns: repeat(4, 1fr);
@@ -252,7 +253,7 @@
       font-size: 1.5rem;
     }
   }
-  
+
   /* Section Video */
   .video {
     background: linear-gradient(black 0%, darkslategray 100%);
@@ -271,7 +272,7 @@
       }
     }
   }
-  
+
   /* Page Footer */
   .page-footer {
     background: white;
@@ -280,7 +281,7 @@
       grid-template-columns: repeat(4, 1fr);
     }
   }
-  
+
   /* Article Cards */
   .card-img-top {
     display: flex;
@@ -319,7 +320,7 @@
     }
     &.priority-1 .description {
       background: white;
-  
+
       @media all and (min-width: 48rem) {
         box-shadow: 0 0 1rem 0.1rem rgba(0, 0, 0, 0.1);
         margin: 0 3rem;
@@ -329,7 +330,7 @@
       }
     }
   }
-  
+
   /* Foolproof Content Images */
   .cover-img {
     display: flex;
@@ -364,4 +365,3 @@
       }
     }
   }
-  
