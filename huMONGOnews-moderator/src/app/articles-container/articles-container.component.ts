@@ -16,6 +16,7 @@ import { ButtonModule } from 'primeng/button';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastrService } from 'ngx-toastr';
+import { DialogModule } from 'primeng/dialog';
 
 @Component({
   selector: 'app-articles-container',
@@ -30,6 +31,7 @@ import { ToastrService } from 'ngx-toastr';
     CardModule,
     ConfirmDialogModule,
     ButtonModule,
+    DialogModule,
   ],
   templateUrl: './articles-container.component.html',
   styleUrl: './articles-container.component.css',
@@ -121,6 +123,7 @@ export class ArticlesContainerComponent implements OnInit, OnDestroy {
           .pipe(takeUntil(this.unsubscriber$))
           .subscribe((data) => {
             this.toastr.success('Successfuly archived an article!');
+            this.articleService;
             this.router.navigate([
               '/moderator-dashboard',
               'articles-container',
@@ -134,7 +137,7 @@ export class ArticlesContainerComponent implements OnInit, OnDestroy {
     });
   }
 
-  edit(event: Event, id: string) {
+  edit(event: Event, id: string, contents: string) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       message: 'Are you sure that you want to go to edit?',
@@ -151,5 +154,18 @@ export class ArticlesContainerComponent implements OnInit, OnDestroy {
         this.toastr.info('You canceled editing.', 'Info');
       },
     });
+  }
+
+  public visibleArticleId: string = '';
+  public visibleDialog = false;
+
+  showDialog(id: string) {
+    this.visibleArticleId = id;
+    this.visibleDialog = true;
+  }
+
+  hideDialog() {
+    this.visibleArticleId = '';
+    this.visibleDialog = false;
   }
 }

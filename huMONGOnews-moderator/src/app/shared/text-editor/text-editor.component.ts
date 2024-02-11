@@ -1,5 +1,6 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   HtmlEditorService,
@@ -11,11 +12,20 @@ import {
   RichTextEditor,
   RichTextEditorComponent,
 } from '@syncfusion/ej2-angular-richtexteditor';
+import { ArticleService } from '../../services/article.service';
+import { HttpClientModule } from '@angular/common/http';
+import { Subject, map, switchMap, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-text-editor',
   standalone: true,
-  imports: [CommonModule, RichTextEditorModule, FormsModule],
+  imports: [
+    CommonModule,
+    RichTextEditorModule,
+    FormsModule,
+    HttpClientModule,
+    AsyncPipe,
+  ],
   templateUrl: './text-editor.component.html',
   styleUrl: './text-editor.component.css',
   providers: [
@@ -24,10 +34,12 @@ import {
     ImageService,
     HtmlEditorService,
     QuickToolbarService,
+    ArticleService,
   ],
 })
-export class TextEditorComponent implements OnInit {
-  public value: string | null = null;
+export class TextEditorComponent implements OnInit, OnDestroy {
+  public value: string = '';
+  unsubscriber$ = new Subject<void>();
 
   @ViewChild('rte')
   private richTextEditor!: RichTextEditorComponent;
@@ -84,10 +96,37 @@ export class TextEditorComponent implements OnInit {
     ],
   };
 
-  ngOnInit(): void {}
+  constructor(
+    private articleService: ArticleService,
+    private activatedRoute: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    this.activatedRoute.paramMap
+      .pipe(
+        map((params) => {
+          return params.get('id') ?? '';
+        }),
+        switchMap((articleId: string) => {
+          return this.articleService.findById(articleId);
+        })
+      )
+      .pipe(takeUntil(this.unsubscriber$))
+      .subscribe((article) => {
+        console.log(article.contents);
+        this.value = article.contents;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscriber$.next();
+    this.unsubscriber$.complete();
+  }
 
   rteCreated(): void {
     this.richTextEditor.insertImageSettings.saveFormat = 'Base64';
+    this.richTextEditor.enablePersistence = true;
+    this.richTextEditor.enableTabKey = true;
   }
 
   public getHTMLValue(): string | null {

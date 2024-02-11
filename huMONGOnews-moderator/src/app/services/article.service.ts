@@ -8,6 +8,8 @@ import { environment } from '../../environments/environment.development';
   providedIn: 'root',
 })
 export class ArticleService {
+  public currentEditingDocumentContents: string | null = null;
+
   constructor(private httpClient: HttpClient) {}
 
   createArticle(article: Article): Observable<Article> {
@@ -15,6 +17,10 @@ export class ArticleService {
       `${environment.apiUrl}/article`,
       article
     );
+  }
+
+  findById(id: string) {
+    return this.httpClient.get<Article>(`${environment.apiUrl}/article/${id}`);
   }
 
   patchState(id: string, state: ArticleState) {

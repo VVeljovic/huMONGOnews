@@ -4,15 +4,27 @@
     <p-card
       *ngFor="let article of articles$ | async as articles"
       [header]="article.title"
-      [style]="{ width: '100%', height: '100%', cursor: 'pointer' }"
+      [style]="{ width: '100%', height: '100%' }"
       class="card"
     >
       <ng-template pTemplate="header">
         <img
+          (click)="showDialog(article._id)"
+          style="cursor: pointer"
           [alt]="'data:image/png;charset=utf-8;base64,' + article.titleImage"
           [src]="'data:image/jpeg;charset=utf-8;base64,' + article.titleImage"
           class="card-image"
         />
+        <p-dialog
+          *ngIf="article._id === visibleArticleId"
+          [header]="article.title"
+          [maximizable]="true"
+          (onHide)="hideDialog()"
+          [(visible)]="visibleDialog"
+          [style]="{ width: '50vw', height: '300px' }"
+        >
+          <div [innerHTML]="article.contents"></div>
+        </p-dialog>
       </ng-template>
       <p>
         {{ article.description }}
@@ -32,7 +44,7 @@
           [style]="{ 'margin-left': '.5em' }"
         ></p-button>
         <p-button
-          (onClick)="edit($event, article._id)"
+          (onClick)="edit($event, article._id, article.contents)"
           *ngIf="article.state != 'POST'"
           label="Edit"
           styleClass="p-button-secondary"
