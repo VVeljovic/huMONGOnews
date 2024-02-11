@@ -30,7 +30,7 @@ export class Article {
   @Prop({ type: Date, default: null })
   dateStateUpdated: Date;
 
-  @Prop(String)
+  @Prop({ type: String, length: 1000 })
   description: string;
 
   @Prop({

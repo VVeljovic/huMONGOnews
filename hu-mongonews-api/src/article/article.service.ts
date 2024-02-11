@@ -108,6 +108,18 @@ export class ArticleService {
     });
   }
 
+  async findArticlesForModeratorInState(
+    moderatorId: string,
+    articleState: ArticleState,
+  ) {
+    return await this.articleModel
+      .find({
+        state: articleState,
+        moderator: moderatorId,
+      })
+      .sort('-dateStateUpdated');
+  }
+
   remove(id: number) {
     return `This action removes a #${id} article`;
   }

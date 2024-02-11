@@ -92,4 +92,15 @@ export class ArticleController {
       +limit,
     );
   }
+
+  @Get('moderator/:moderatorId/state/:state')
+  async findArticlesForModeratorInState(
+    @Param('moderatorId') moderatorId: string,
+    @Param('state') state: ArticleState,
+  ) {
+    return await this.articleService.findArticlesForModeratorInState(
+      moderatorId,
+      state,
+    );
+  }
 }

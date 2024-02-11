@@ -1,1 +1,44 @@
-<h1>{{ articleType | async | titlecase }}</h1>
+<h1>{{ articleType$ | async | titlecase }}</h1>
+<div class="scrollable">
+  <div class="card-container">
+    <p-card
+      *ngFor="let article of articles$ | async as articles"
+      [header]="article.title"
+      [style]="{ width: '100%', height: '100%', cursor: 'pointer' }"
+      class="card"
+    >
+      <ng-template pTemplate="header">
+        <img
+          [alt]="'data:image/png;charset=utf-8;base64,' + article.titleImage"
+          [src]="'data:image/jpeg;charset=utf-8;base64,' + article.titleImage"
+          class="card-image"
+        />
+      </ng-template>
+      <p>
+        {{ article.description }}
+      </p>
+      <ng-template pTemplate="footer">
+        <p-confirmDialog></p-confirmDialog>
+        <p-button
+          (click)="post($event, article._id)"
+          *ngIf="article.state != 'POST'"
+          label="Post"
+        ></p-button>
+        <p-button
+          (click)="archive($event, article._id)"
+          *ngIf="article.state != 'ARCHIVE'"
+          label="Archive"
+          styleClass="p-button-secondary"
+          [style]="{ 'margin-left': '.5em' }"
+        ></p-button>
+        <p-button
+          (onClick)="edit($event, article._id)"
+          *ngIf="article.state != 'POST'"
+          label="Edit"
+          styleClass="p-button-secondary"
+          [style]="{ 'margin-left': '.5em' }"
+        ></p-button>
+      </ng-template>
+    </p-card>
+  </div>
+</div>

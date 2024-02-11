@@ -1,0 +1,53 @@
+.scrollable {
+  overflow: auto;
+  height: 100%;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Adjust the value as needed for padding between cards */
+  padding: 20px; /* Adjust the value as needed for overall padding */
+}
+
+.card {
+  flex: 1 1 calc(33.33% - 20px);
+  max-width: calc(33.33% - 20px);
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.3s ease; /* Add transition for smooth effect */
+}
+
+.card p {
+  max-height: 100px; /* Set the maximum height */
+  overflow: hidden; /* Hide the overflow */
+  text-overflow: ellipsis; /* Display ellipsis for overflowed text */
+  white-space: nowrap; /* Prevent line breaks */
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow on hover */
+}
+
+.card-image {
+  width: 100%;
+  height: 200px; /* Adjust the height of the images as needed */
+  object-fit: cover;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+@media (max-width: 900px) {
+  .card {
+    flex: 1 1 calc(50% - 20px); /* Flexible width for two cards per row with padding */
+    max-width: calc(50% - 20px); /* Maximum width for two cards per row with padding */
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    flex: 1 1 calc(100% - 20px); /* Flexible width for one card per row with padding */
+    max-width: calc(100% - 20px); /* Maximum width for one card per row with padding */
+  }
+}
