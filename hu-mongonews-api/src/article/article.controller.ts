@@ -103,4 +103,9 @@ export class ArticleController {
       state,
     );
   }
+
+  @Get('searchByContent/:searchString')
+  async searchByContent(@Param('searchString') searchString: string) {
+    return await this.articleService.searchArticlesByContent(searchString);
+  }
 }

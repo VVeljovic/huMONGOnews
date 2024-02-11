@@ -77,7 +77,11 @@ export class ArticleService {
   }
 
   async getLastNArticles(n: number): Promise<Article[]> {
-    return this.articleModel.find({state:'POST'}).sort({ dateCreated: -1 }).limit(n).exec();
+    return this.articleModel
+      .find({ state: 'POST' })
+      .sort({ dateCreated: -1 })
+      .limit(n)
+      .exec();
   }
 
   async incrementNumberOfViews(id: string) {
@@ -88,7 +92,7 @@ export class ArticleService {
 
   async getNWithMostNumberOfViews(n: number) {
     const articles = await this.articleModel
-      .find({state:'POST'})
+      .find({ state: 'POST' })
       .sort({ numberOfViews: -1 })
       .limit(n)
       .exec();
@@ -118,6 +122,16 @@ export class ArticleService {
         moderator: moderatorId,
       })
       .sort('-dateStateUpdated');
+  }
+
+  async searchArticlesByContent(searchString: string) {
+    return await this.articleModel.find({
+      $text: {
+        $search: searchString,
+        $caseSensitive: false,
+        $diacriticSensitive: false,
+      },
+    });
   }
 
   remove(id: number) {

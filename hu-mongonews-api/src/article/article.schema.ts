@@ -21,7 +21,7 @@ export class Article {
   @Prop(String)
   titleImage: string; // base64 encoded
 
-  @Prop(String)
+  @Prop({ type: String, index: { type: 'text' } })
   contents: string; // HTML format
 
   @Prop({ type: Date })
