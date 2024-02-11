@@ -1,7 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { Article, ArticleState } from './article.schema';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, ObjectId } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 import { Category } from 'src/category/category.schema';
 
 @Injectable()
@@ -149,8 +149,14 @@ export class ArticleService {
         },
       },
       {
-        $match: { moderator: moderatorId },
+        $lookup: {
+          from: 'moderators',
+          localField: 'moderator',
+          foreignField: '_id',
+          as: 'moderator',
+        },
       },
+      { $match: { 'moderator._id': new mongoose.Types.ObjectId(moderatorId) } },
     ]);
   }
 
