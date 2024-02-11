@@ -1,1 +1,34 @@
-<p>{{ moderator | json }}</p>
+<div
+  style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  "
+>
+  <p-card
+    [header]="moderator.username"
+    [subheader]="moderator.firstName + ' ' + moderator.lastName"
+    [style]="{ top: '20%', width: '360px', position: 'relative' }"
+  >
+    <ng-template pTemplate="header">
+      <img
+        alt="Card"
+        src="https://primefaces.org/cdn/primeng/images/usercard.png"
+        style="position: relative; width: 100%"
+      />
+      <p-avatar
+        [label]="
+          moderator.firstName.toUpperCase()[0] +
+          moderator.lastName.toUpperCase()[0]
+        "
+        shape="circle"
+        icon="pi pi-user"
+        styleClass="mr-2"
+        size="xlarge"
+        [style]="{ 'background-color': '#8CB9BD', position: 'absolute', top: '30%', left: '50%', transform: 'translate(-50%, -50%)', }"
+      ></p-avatar>
+    </ng-template>
+    <p>{{ moderator.email }}</p>
+  </p-card>
+</div>

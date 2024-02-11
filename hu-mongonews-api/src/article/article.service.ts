@@ -125,18 +125,6 @@ export class ArticleService {
       .sort('-dateStateUpdated');
   }
 
-  // {
-  //   $match: { moderator: moderatorId },
-  // },
-  // {
-  //   $match: {
-  //     score: { $meta: 'textScore' },
-  //   },
-  // },
-  // {
-  //   $sort: { score: { $meta: 'textScore' } },
-  // },
-
   async searchArticlesByContent(moderatorId: string, searchString: string) {
     return await this.articleModel.aggregate([
       {
@@ -156,7 +144,37 @@ export class ArticleService {
           as: 'moderator',
         },
       },
-      { $match: { 'moderator._id': new mongoose.Types.ObjectId(moderatorId) } },
+      {
+        $match: {
+          'moderator._id': new mongoose.Types.ObjectId(moderatorId),
+        },
+      },
+      {
+        $project: {
+          title: 1,
+          titleImage: 1,
+          contents: 1,
+          dateCreated: 1,
+          dateStateUpdated: 1,
+          description: 1,
+          state: 1,
+          location: 1,
+          moderator: 1,
+          comments: 1,
+          numberOfViews: 1,
+          categoryId: 1,
+          score: {
+            $meta: 'textScore',
+          },
+        },
+      },
+      {
+        $sort: {
+          score: {
+            $meta: 'textScore',
+          },
+        },
+      },
     ]);
   }
 
